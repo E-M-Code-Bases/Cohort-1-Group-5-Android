@@ -1,4 +1,4 @@
-package com.example.dom
+package com.dominic.movieswatch
 
 import org.junit.Test
 
