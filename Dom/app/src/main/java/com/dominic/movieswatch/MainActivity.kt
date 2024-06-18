@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.dominic.movieswatch.databinding.ActivityMainBinding
 import com.dominic.movieswatch.ui.HomePage
 
+
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
