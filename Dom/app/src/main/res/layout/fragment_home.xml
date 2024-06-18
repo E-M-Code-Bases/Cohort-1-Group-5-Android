@@ -66,28 +66,41 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:padding="10dp"
-            android:src="@drawable/searchicon"
             android:background="@android:color/transparent"
             android:clickable="true"
-            android:focusable="true" />
+            android:focusable="true"
+            android:padding="10dp"
+            android:src="@drawable/searchicon"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     </RelativeLayout>
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:tabTextColor="@color/white"
-        android:backgroundTint="@color/blue"
         android:background="@color/white"
+        android:backgroundTint="@color/blue"
+        app:tabGravity="fill"
         app:tabMode="fixed"
-        app:tabGravity="fill" />
+        app:tabTextColor="@color/white"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:menu="@menu/bottom_nav_menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </LinearLayout>

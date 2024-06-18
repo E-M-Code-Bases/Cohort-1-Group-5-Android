@@ -36,10 +36,10 @@ android {
         jvmTarget = "1.8"
     }
 
-    buildFeatures{
-        viewBinding= true
+    buildFeatures {
+        viewBinding = true
     }
-
+}
 dependencies {
 
     implementation(libs.androidx.core.ktx)
@@ -58,3 +58,4 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
+
