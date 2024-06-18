@@ -65,6 +65,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
     implementation (libs.core)
     // Coroutines
     implementation (libs.kotlinx.coroutines.core)
@@ -89,3 +90,4 @@ dependencies {
     kapt (libs.androidx.room.compiler)
     implementation (libs.androidx.room.ktx)
 }
+
