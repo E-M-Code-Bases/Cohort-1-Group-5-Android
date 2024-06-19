@@ -72,9 +72,6 @@
             android:src="@drawable/searchicon"
             tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
-
-            android:focusable="true" />
-
     </RelativeLayout>
 
     <com.google.android.material.tabs.TabLayout

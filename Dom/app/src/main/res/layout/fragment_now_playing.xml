@@ -7,9 +7,10 @@
     tools:context=".ui.fragments.NowPlaying">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/upcomingRecyclerView"
+        android:id="@+id/nowPlayingRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        tools:listitem="@layout/movie_items"
         android:padding="8dp"
         android:clipToPadding="false"
         android:scrollbars="vertical"
