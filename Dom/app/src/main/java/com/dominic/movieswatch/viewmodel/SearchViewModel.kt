@@ -1,5 +1,7 @@
 package com.dominic.movieswatch.viewmodel
 
-class SearchViewModel (){
+import androidx.lifecycle.ViewModel
+
+class SearchViewModel (get:Any): ViewModel(){
 
 }
