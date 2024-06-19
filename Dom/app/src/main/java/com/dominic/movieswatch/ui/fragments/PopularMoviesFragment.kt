@@ -12,6 +12,7 @@ class PopularMoviesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val category = arguments?.getString("category")
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_popular_movies, container, false)
     }

@@ -7,7 +7,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
 import com.dominic.movieswatch.R
 import com.dominic.movieswatch.databinding.MovieItemsBinding
 import com.dominic.movieswatch.model.Movie
