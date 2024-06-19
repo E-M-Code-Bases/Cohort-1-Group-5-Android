@@ -15,8 +15,4 @@
         android:scrollbars="vertical"
         android:overScrollMode="never" />
 
-
-
-
-
 </FrameLayout>
