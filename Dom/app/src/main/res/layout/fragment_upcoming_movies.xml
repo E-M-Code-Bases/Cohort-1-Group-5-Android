@@ -6,7 +6,6 @@
 
     android:background="@drawable/background"
 
-    android:background="@color/white"
 
     tools:context=".ui.fragments.UpcomingMoviesFragment">
 
@@ -21,9 +20,6 @@
         android:overScrollMode="never">
 
     </androidx.recyclerview.widget.RecyclerView>
-
-        android:overScrollMode="never" />
-
 
 
 
