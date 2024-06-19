@@ -66,14 +66,10 @@
             android:layout_centerVertical="true"
             android:background="@android:color/transparent"
             android:clickable="true"
-
             android:focusable="true"
             android:padding="10dp"
             android:src="@drawable/searchicon"
             tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-
-
-            android:focusable="true" />
 
     </RelativeLayout>
 
