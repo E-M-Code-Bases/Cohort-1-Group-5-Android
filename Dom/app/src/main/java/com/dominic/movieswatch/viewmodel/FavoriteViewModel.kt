@@ -1,5 +1,7 @@
 package com.dominic.movieswatch.viewmodel
 
-class FavoriteViewModel (){
+import androidx.lifecycle.ViewModel
+
+class FavoriteViewModel (get:Any): ViewModel(){
 
 }

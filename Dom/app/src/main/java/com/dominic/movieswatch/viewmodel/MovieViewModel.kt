@@ -1,5 +1,8 @@
 package com.dominic.movieswatch.viewmodel
 
-class MovieViewModel (){
+import androidx.lifecycle.ViewModel
+import retrofit2.http.GET
+
+class MovieViewModel (get: GET): ViewModel (){
 
 }

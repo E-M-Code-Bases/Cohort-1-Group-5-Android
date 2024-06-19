@@ -14,3 +14,4 @@ class MovieApplication : Application() {
         }
     }
 }
+
