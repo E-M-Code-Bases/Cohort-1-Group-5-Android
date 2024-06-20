@@ -8,16 +8,18 @@ import com.dominic.movieswatch.ui.fragments.TopRatedFragment
 import com.dominic.movieswatch.ui.fragments.UpcomingMoviesFragment
 import com.example.domflex.ui.PopularMoviesFragment
 
-class MoviePagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
+class MoviePagerAdapter(fragmentActivity: FragmentActivity) :
+    FragmentStateAdapter(fragmentActivity) {
     override fun getItemCount(): Int {
-        return 4 // Number of tabs
+        return 4
     }
+
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-              0 -> NowPlaying()
+            0 -> NowPlaying()
             1 -> PopularMoviesFragment()
             2 -> TopRatedFragment()
-             3 -> UpcomingMoviesFragment()
+            3 -> UpcomingMoviesFragment()
             else -> PopularMoviesFragment()
         }
     }

@@ -1,4 +1,4 @@
-package com.dominic.movieswatch
+package com.dominic.movieswatch.di
 
 import com.dominic.movieswatch.api.ApiService
 import com.dominic.movieswatch.repository.MovieRepository
@@ -32,7 +32,7 @@ class AppModule : AppModuleInterface {
                 val original = chain.request()
                 val originalHttpUrl = original.url
                 val url = originalHttpUrl.newBuilder()
-                    .addQueryParameter("api_key", api_key)
+                    .addQueryParameter("API_KEY", api_key)
                     .build()
                 val requestBuilder = original.newBuilder().url(url)
                 val request = requestBuilder.build()
@@ -55,7 +55,7 @@ val networkModule: Module = module {
 }
 
 val repositoryModule: Module = module {
-    single { MovieRepository(get()) }
+    single { MovieRepository(get(), get()) }
 }
 
 val viewModelModule: Module = module {
@@ -64,5 +64,4 @@ val viewModelModule: Module = module {
     viewModel { FavoriteViewModel(get()) }
 }
 
-//for easier import
 val appModules = listOf(networkModule, repositoryModule, viewModelModule)
