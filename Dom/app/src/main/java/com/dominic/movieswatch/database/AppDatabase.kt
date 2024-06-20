@@ -1,4 +1,4 @@
-// AppDatabase.kt
+
 package com.dominic.movieswatch.database
 
 import android.content.Context
@@ -17,18 +17,15 @@ abstract class AppDatabase : RoomDatabase() {
         private var INSTANCE: AppDatabase? = null
 
         fun getDatabase(context: Context): AppDatabase {
-            val tempInstance = INSTANCE
-            if (tempInstance != null) {
-                return tempInstance
-            }
-            synchronized(this) {
+          return INSTANCE ?: synchronized(this) {
+            
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
                     "movie_database"
                 ).build()
                 INSTANCE = instance
-                return instance
+                instance
             }
         }
     }

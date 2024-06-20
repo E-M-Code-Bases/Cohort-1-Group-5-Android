@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginBottom="10dp"
-                android:src="@{movie.poster_path != null ? `https://image.tmdb.org/t/p/w500` + movie.poster_path : @drawable/baseline_image_search_24}" />
+                android:src="@{movie.posterPath != null ? `https://image.tmdb.org/t/p/w500` + movie.posterPath : @drawable/baseline_image_search_24}" />
 
             <TextView
                 android:id="@+id/title"
