@@ -1,4 +1,4 @@
-package com.example.movieapp.data
+package com.dominic.movieswatch.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
@@ -41,4 +41,11 @@ interface MovieDao {
 
     @Query("SELECT * FROM movie WHERE category = 'now_watching'")
     fun getNowWatchingMovies(): LiveData<List<Movie>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun addFavoriteMovie(movie: Movie)
+
+    @Delete
+    suspend fun removeFavoriteMovie(movie: Movie)
 }
+
