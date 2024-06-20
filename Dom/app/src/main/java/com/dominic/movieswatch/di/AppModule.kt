@@ -1,6 +1,7 @@
 package com.dominic.movieswatch.di
 
 import com.dominic.movieswatch.api.ApiService
+import com.dominic.movieswatch.database.AppDatabase
 import com.dominic.movieswatch.repository.MovieRepository
 import com.dominic.movieswatch.viewmodel.FavoriteViewModel
 import com.dominic.movieswatch.viewmodel.MovieViewModel
@@ -63,5 +64,9 @@ val viewModelModule: Module = module {
     viewModel { SearchViewModel(get()) }
     viewModel { FavoriteViewModel(get()) }
 }
+val databaseModules: Module = module {
+    single { AppDatabase.getDatabase(get()) }
+    single { get<AppDatabase>().movieDao() }
+}
 
-val appModules = listOf(networkModule, repositoryModule, viewModelModule)
+val appModules = listOf(networkModule, repositoryModule, viewModelModule, databaseModules)
