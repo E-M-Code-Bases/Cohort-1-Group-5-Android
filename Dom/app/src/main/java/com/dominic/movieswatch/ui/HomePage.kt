@@ -56,7 +56,7 @@ class HomePage : AppCompatActivity() {
 
         // Find TabLayout and ViewPager2 by ID
         val tabLayout: TabLayout = findViewById(R.id.tab_layout)
-        val viewPager: ViewPager2 = findViewById(R.id.view_pager)
+        val viewPager: ViewPager2 = findViewById(R.id.viewPager)
 
         // Initialize ViewPager2 with MovieAdapter
         val movieAdapter =MovieAdapter(this)

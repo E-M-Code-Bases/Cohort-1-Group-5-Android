@@ -1,4 +1,5 @@
 package com.dominic.movieswatch
+
 import com.dominic.movieswatch.api.ApiService
 import com.dominic.movieswatch.repository.MovieRepository
 import com.dominic.movieswatch.viewmodel.FavoriteViewModel
@@ -7,40 +8,61 @@ import com.dominic.movieswatch.viewmodel.SearchViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.module.Module
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-val baseUrl = "https://api.themoviedb.org/3/"
-
-val loggingInterceptor: HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
-    level = HttpLoggingInterceptor.Level.BODY
+interface AppModuleInterface {
+    fun getRetrofitInstance(api_key: String): ApiService
 }
 
-val okHttpClient: OkHttpClient = OkHttpClient.Builder()
-    .addInterceptor(loggingInterceptor)
-    .build()
+class AppModule : AppModuleInterface {
 
-val networkModule = module {
-    single {
-        Retrofit.Builder()
+    override fun getRetrofitInstance(api_key: String): ApiService {
+        val baseUrl = "https://api.themoviedb.org/3/"
+
+        val loggingInterceptor = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+
+        val okHttpClient = OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .addInterceptor { chain ->
+                val original = chain.request()
+                val originalHttpUrl = original.url
+                val url = originalHttpUrl.newBuilder()
+                    .addQueryParameter("api_key", api_key)
+                    .build()
+                val requestBuilder = original.newBuilder().url(url)
+                val request = requestBuilder.build()
+                chain.proceed(request)
+            }
+            .build()
+
+        val retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(ApiService::class.java)
+
+        return retrofit.create(ApiService::class.java)
     }
 }
 
-
-
-val appModule = module {
-    single { networkModule  }
-    single {
-        MovieRepository(get())
-        viewModel { MovieViewModel(get()) }
-        viewModel { SearchViewModel(get()) }
-        viewModel { FavoriteViewModel(get()) }
-    }
+val networkModule: Module = module {
+    single { (api_key: String) -> AppModule().getRetrofitInstance(api_key) }
 }
 
+val repositoryModule: Module = module {
+    single { MovieRepository(get()) }
+}
+
+val viewModelModule: Module = module {
+    viewModel { MovieViewModel(get()) }
+    viewModel { SearchViewModel(get()) }
+    viewModel { FavoriteViewModel(get()) }
+}
+
+//for easier import
+val appModules = listOf(networkModule, repositoryModule, viewModelModule)
