@@ -1,64 +1,93 @@
 package com.dominic.movieswatch.viewmodel
 
-import android.graphics.Movie
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.dominic.movieswatch.model.MoviesResponse
 import com.dominic.movieswatch.repository.MovieRepository
 import kotlinx.coroutines.launch
 
-class MovieViewModel (private val repository: MovieRepository): ViewModel (){
+class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
 
-    private val _popularMovies = MutableLiveData<List<Movie>>()
-    val popularMovies: LiveData<List<Movie>> get() = _popularMovies
-    private val _topRatedMovies = MutableLiveData<List<Movie>>()
-    val topRatedMovies: LiveData<List<Movie>> get() = _topRatedMovies
-    private val _upcomingMovies = MutableLiveData<Movie>()
-    val upcomingMovies: LiveData<Movie> get() = _upcomingMovies
-    private val _nowPlayingMovies = MutableLiveData<Movie>()
-    val nowPlayingMovies: LiveData<Movie> get() = _nowPlayingMovies
-    private val _trailers = MutableLiveData<List<Movie>>()
-    val trailers: LiveData<List<Movie>> get() = _trailers
+    val popularMovies = MutableLiveData<List<MoviesResponse>>()
+    val topRatedMovies=MutableLiveData<List<MoviesResponse>>()
+    val upcomingMovies=MutableLiveData<List<MoviesResponse>>()
+    val nowPlayingMovies=MutableLiveData<List<MoviesResponse>>()
+    val trailers=MutableLiveData<List<MoviesResponse>>()
+
+    private val apiKey = "97e4139678874939dde9e3da738d82f1"
 
     init {
-    fetchPopularMovies()
-    fetchTopRatedMovies()
-    fetchUpcomingMovies()
-    fetchNowPlayingMovies()
-    fetchTrailers()
+        fetchPopularMovies()
+        fetchTopRatedMovies()
+        fetchUpcomingMovies()
+        fetchNowPlayingMovies()
+        fetchTrailers()
     }
+
     private fun fetchPopularMovies() {
         viewModelScope.launch {
-            val movies = repository.getPopularMovies(apiKey = String.toString())
-            _popularMovies.postValue(movies)
+            try {
+                val response = repository.getPopularMovies(apiKey)
+                if (response.isSuccessful) {
+                    popularMovies.postValue(response.body())
+                }
+            } catch (e: Exception) {
+                // Handle the exception
+            }
         }
     }
+
     private fun fetchTopRatedMovies() {
         viewModelScope.launch {
-            val movies = repository.getTopRatedMovies(apiKey = String.toString())
-            _topRatedMovies.postValue(movies)
+            try {
+                val response = repository.getTopRatedMovies(apiKey)
+                if (response.isSuccessful) {
+                    topRatedMovies.postValue(response.body())
+                }
+            } catch (e: Exception) {
+                // Handle the exception
+            }
         }
     }
+
     private fun fetchUpcomingMovies() {
         viewModelScope.launch {
-            val movies = repository.getUpcomingMovies(apiKey = String.toString())
-            _upcomingMovies.postValue(movies)
+            try {
+                val response = repository.getUpcomingMovies(apiKey)
+                if (response.isSuccessful) {
+                    upcomingMovies.postValue(response.body())
+                }
+            } catch (e: Exception) {
+                // Handle the exception
+            }
         }
-
-
     }
+
     private fun fetchNowPlayingMovies() {
         viewModelScope.launch {
-            val movies = repository.getNowPlaying(apiKey = String.toString())
-            _nowPlayingMovies.postValue(movies)
+            try {
+                val response = repository.getNowPlaying(apiKey)
+                if (response.isSuccessful) {
+                    nowPlayingMovies.postValue(response.body())
+                }
+            } catch (e: Exception) {
+                // Handle the exception
+            }
         }
+    }
 
-        }
     private fun fetchTrailers() {
         viewModelScope.launch {
-            val movies = repository.getTrailers(apiKey = String.toString())
-            _trailers.postValue(movies)
+            try {
+                val response = repository.getTrailers(apiKey)
+                if (response.isSuccessful) {
+                    trailers.postValue(response.body())
+                }
+            } catch (e: Exception) {
+
+            }
         }
     }
 }
