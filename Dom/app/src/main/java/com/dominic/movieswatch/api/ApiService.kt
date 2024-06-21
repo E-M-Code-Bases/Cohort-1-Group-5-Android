@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApiService {
-    @GET("/movie/NowPlaying")
+    @GET("//movie/now_playing")
     suspend fun getNowPlaying(@Query("api_key") apiKey: String, i: Int): Response<List<MoviesResponse>>
 
     @GET("movie/popular")
@@ -25,3 +25,4 @@ interface ApiService {
     @GET("movie/reviews")
     suspend fun getReviews(@Query("api_key") apiKey: String):Response<List<MoviesResponse>>
 }
+
