@@ -1,4 +1,3 @@
-// AppDatabase.kt
 package com.dominic.movieswatch.database
 
 import android.content.Context
@@ -9,6 +8,7 @@ import com.dominic.movieswatch.model.Movie
 
 @Database(entities = [Movie::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
+
     abstract fun movieDao(): MovieDao
 
     companion object {
@@ -16,11 +16,6 @@ abstract class AppDatabase : RoomDatabase() {
         private var INSTANCE: AppDatabase? = null
 
         fun getDatabase(context: Context): AppDatabase {
-            val tempInstance = INSTANCE
-            if (tempInstance != null) {
-                return tempInstance
-            }
-            synchronized(this) {
 
             return INSTANCE ?: synchronized(this) {
 
@@ -31,10 +26,8 @@ abstract class AppDatabase : RoomDatabase() {
                 ).build()
                 INSTANCE = instance
 
-                return instance
+                instance
             }
         }
     }
-}
-
 }

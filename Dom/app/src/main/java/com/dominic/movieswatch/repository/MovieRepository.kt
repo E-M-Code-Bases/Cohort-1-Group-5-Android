@@ -26,12 +26,15 @@ class MovieRepository(private val apiService: ApiService,private val movieDao: M
     suspend fun getTopRatedMovies(apiKey: String): Response<List<MoviesResponse>> {
         return apiService.getTopRatedMovies(apiKey, 1)
     }
+    suspend fun searchMovies(apiKey: String, query: String): Response<MoviesResponse>{
+        return apiService.searchMovies(apiKey, query)
+    }
 
     suspend fun getUpcomingMovies(apiKey: String): Response<List<MoviesResponse>> {
         return apiService.getUpcomingMovies(apiKey, 1)
     }
 
-    suspend fun getTrailers(apiKey: String): Response<List<MoviesResponse>> {
-        return apiService.getTrailers(apiKey, 1)
+    suspend fun getTrailers( apiKey: String): Response<List<MoviesResponse>> {
+        return apiService.getTrailers(apiKey)
     }
 }
