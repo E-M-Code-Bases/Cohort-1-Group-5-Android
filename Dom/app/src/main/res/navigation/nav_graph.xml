@@ -60,9 +60,13 @@
     </navigation>
     <fragment
         android:id="@+id/movieDetails"
-        android:name="com.dominic.movieswatch.ui.MovieDetails"
-        android:label="fragment_movie_details"
-        tools:layout="@layout/fragment_movie_details" />
+        android:name="com.dominic.movieswatch.ui.MovieDetailsFragment"
+        android:label="fragment_movie_details">
+        <argument
+            android:name="movieId"
+            app:argType="integer" />
+    </fragment>
+
     <fragment
         android:id="@+id/popularMoviesFragment"
         android:name="com.example.domflex.ui.PopularMoviesFragment"
