@@ -1,4 +1,4 @@
-package com.dominic.movieswatch
+package com.dominic.movieswatch.utils
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.dominic.movieswatch.R
 import com.dominic.movieswatch.databinding.ActivityMainBinding
 import com.dominic.movieswatch.ui.HomePage
 

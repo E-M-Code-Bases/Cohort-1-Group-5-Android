@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/movieDetails">
+    app:startDestination="@id/homePage">
 
     <fragment
         android:id="@+id/topRatedFragment"
@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/favorite"
-        android:name="com.dominic.movieswatch.ui.Favorite"
+        android:name="com.dominic.movieswatch.ui.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
     <fragment

@@ -9,7 +9,6 @@ import com.dominic.movieswatch.model.Movie
 
 @Database(entities = [Movie::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
-
     abstract fun movieDao(): MovieDao
 
     companion object {
@@ -22,14 +21,20 @@ abstract class AppDatabase : RoomDatabase() {
                 return tempInstance
             }
             synchronized(this) {
+
+            return INSTANCE ?: synchronized(this) {
+
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
                     "movie_database"
                 ).build()
                 INSTANCE = instance
+
                 return instance
             }
         }
     }
+}
+
 }
