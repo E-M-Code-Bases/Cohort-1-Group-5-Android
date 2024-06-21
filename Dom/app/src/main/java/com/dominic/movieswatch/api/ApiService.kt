@@ -1,8 +1,11 @@
 package com.dominic.movieswatch.api
 
+import com.dominic.movieswatch.model.Movie
 import com.dominic.movieswatch.model.MoviesResponse
+import com.dominic.movieswatch.model.Trailer
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
@@ -26,4 +29,10 @@ interface ApiService {
 
     @GET("movie/reviews")
     suspend fun getReviews(@Query("api_key") apiKey: String):Response<List<MoviesResponse>>
+
+    @GET("movie/{movieId}")
+    suspend fun getMovieDetails(@Path("movieId") movieId: Int): Movie
+
+    @GET("movie/{movieId}/trailers")
+    suspend fun getMovieTrailer(@Path("movieId") movieId: Int): Trailer
 }

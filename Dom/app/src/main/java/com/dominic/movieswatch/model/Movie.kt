@@ -12,6 +12,7 @@ data class Movie(
     val backdropPath: String,
     @SerializedName("genre_ids")
     val genreIds: List<Int>,
+    @PrimaryKey
     @SerializedName("id")
     val id: Int,
     @SerializedName("original_language")
@@ -34,5 +35,6 @@ data class Movie(
     val voteAverage: Double,
     @SerializedName("vote_count")
     val voteCount: Int
-
-)
+) {
+    fun getPosterUrl() = "https://image.tmdb.org/t/p/w500/$posterPath"
+}

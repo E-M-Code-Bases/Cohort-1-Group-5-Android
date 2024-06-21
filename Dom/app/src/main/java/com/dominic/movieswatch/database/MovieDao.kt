@@ -3,6 +3,7 @@ package com.dominic.movieswatch.database
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import androidx.room.Dao
+import com.dominic.movieswatch.model.FavoriteMovie
 import com.dominic.movieswatch.model.Movie
 
 
@@ -16,16 +17,17 @@ interface MovieDao {
     @Query("UPDATE movie SET isFavorite = 1 WHERE id = :movieId")
     suspend fun markAsFavorite(movieId: Int)
 
-    @Query("UPDATE movie SET isFavorite = 0 WHERE id = :movieId")
+    @Query("DELETE FROM favorite_movies WHERE movieId = :movieId")
     suspend fun removeFromFavorites(movieId: Int)
 
     @Query("SELECT * FROM movie WHERE category = 'now_watching'")
     fun getNowWatchingMovies(): LiveData<List<Movie>>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addFavoriteMovie(movie: Movie)
+    @Query("SELECT EXISTS(SELECT 1 FROM favorite_movies WHERE movieId = :movieId)")
+    suspend fun isFavorite(movieId: Int): Boolean
 
-    @Delete
-    suspend fun removeFavoriteMovie(movie: Movie)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun addToFavorites(movie: FavoriteMovie)
+
 }
 
