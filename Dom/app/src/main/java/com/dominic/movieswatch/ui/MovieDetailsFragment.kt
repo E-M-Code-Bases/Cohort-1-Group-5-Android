@@ -1,60 +1,63 @@
 package com.dominic.movieswatch.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 import com.dominic.movieswatch.R
+import com.dominic.movieswatch.databinding.FragmentMovieDetailsBinding
+import com.dominic.movieswatch.viewmodel.MovieDetailsViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class MovieDetailsFragment : Fragment() {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [MovieDetails.newInstance] factory method to
- * create an instance of this fragment.
- */
-class MovieDetails : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentMovieDetailsBinding
+    private val viewModel: MovieDetailsViewModel by viewModels()
+    private val args: MovieDetailsFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_movie_details, container, false)
+    ): View {
+        // Inflate the layout for this fragment using DataBindingUtil
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie_details, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MovieDetails.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MovieDetails().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Bind ViewModel to layout
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+
+        // Get the movie ID from arguments and load movie details
+        val movieId = args.movieId
+        viewModel.loadMovieDetails(movieId)
+
+        // Observe the movie data and update UI accordingly
+        viewModel.movieDetails.observe(viewLifecycleOwner, Observer { movie ->
+            binding.movie = movie
+        })
+
+        // Observe the favorite status and update UI accordingly
+        viewModel.isFavorite.observe(viewLifecycleOwner, Observer { isFavorite ->
+            updateFavoriteIcon(isFavorite)
+        })
+
+        // Set click listener for the favorite icon
+        binding.favoriteIcon.setOnClickListener {
+            viewModel.toggleFavorite()
+        }
+    }
+
+    private fun updateFavoriteIcon(isFavorite: Boolean) {
+        val iconRes = if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
+        binding.favoriteIcon.setImageResource(iconRes)
     }
 }
+

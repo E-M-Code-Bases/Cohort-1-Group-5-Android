@@ -4,6 +4,7 @@ import com.dominic.movieswatch.api.ApiService
 import com.dominic.movieswatch.database.AppDatabase
 import com.dominic.movieswatch.repository.MovieRepository
 import com.dominic.movieswatch.viewmodel.FavoriteViewModel
+import com.dominic.movieswatch.viewmodel.MovieDetailsViewModel
 import com.dominic.movieswatch.viewmodel.MovieViewModel
 import com.dominic.movieswatch.viewmodel.SearchViewModel
 import okhttp3.OkHttpClient
@@ -63,6 +64,7 @@ val viewModelModule: Module = module {
     viewModel { MovieViewModel(get()) }
     viewModel { SearchViewModel(get()) }
     viewModel { FavoriteViewModel(get()) }
+    viewModel { MovieDetailsViewModel(get())  }
 }
 val databaseModules: Module = module {
     single { AppDatabase.getDatabase(get()) }
