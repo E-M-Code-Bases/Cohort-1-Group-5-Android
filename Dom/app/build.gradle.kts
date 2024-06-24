@@ -92,5 +92,12 @@ dependencies {
     implementation (libs.androidx.room.runtime)
     kapt (libs.androidx.room.compiler)
     implementation (libs.androidx.room.ktx)
+
+    implementation (libs.glide)
+    annotationProcessor (libs.compiler)
+
+    implementation (libs.androidx.recyclerview)
+    // For control over item selection of both touch and mouse driven selection
+    implementation (libs.androidx.recyclerview.selection)
 }
 

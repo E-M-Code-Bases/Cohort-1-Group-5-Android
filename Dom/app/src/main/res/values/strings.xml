@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">MoviesWatch</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="release_date">Release Date: %1$s</string>
+    <string name="rating">Rating: %1$s/10</string>
     <string name="favorites">Favorites Screen</string>
     <string name="home">Home Screen</string>
     <string name="search">Search Screen</string>
