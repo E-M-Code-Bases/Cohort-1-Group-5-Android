@@ -46,17 +46,14 @@ class MovieRepository(private val apiService: ApiService,private val movieDao: M
     }
 
     suspend fun isFavorite(movieId: Int): Boolean {
-        // Check favorite status from the database
         return movieDao.isFavorite(movieId)
     }
 
     suspend fun toggleFavorite(movieId: Int): Boolean {
-        // Toggle favorite status in the database
         val isCurrentlyFavorite = movieDao.isFavorite(movieId)
         if (isCurrentlyFavorite) {
             movieDao.removeFromFavorites(movieId)
         } else {
-            // Assuming you have a method to get movie details for adding to favorites
             val movieDetails = apiService.getMovieDetails(movieId)
             val favoriteMovie = FavoriteMovie(
                 movieId = movieDetails.id,

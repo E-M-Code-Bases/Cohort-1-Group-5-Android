@@ -23,7 +23,6 @@ class MovieDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment using DataBindingUtil
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie_details, container, false)
         return binding.root
     }
@@ -31,25 +30,20 @@ class MovieDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Bind ViewModel to layout
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        // Get the movie ID from arguments and load movie details
         val movieId = args.movieId
         viewModel.loadMovieDetails(movieId)
 
-        // Observe the movie data and update UI accordingly
         viewModel.movieDetails.observe(viewLifecycleOwner, Observer { movie ->
             binding.movie = movie
         })
 
-        // Observe the favorite status and update UI accordingly
         viewModel.isFavorite.observe(viewLifecycleOwner, Observer { isFavorite ->
             updateFavoriteIcon(isFavorite)
         })
 
-        // Set click listener for the favorite icon
         binding.favoriteIcon.setOnClickListener {
             viewModel.toggleFavorite()
         }
