@@ -8,14 +8,20 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.navigation.NavController
 import androidx.viewpager2.widget.ViewPager2
 import com.dominic.movieswatch.R
 import com.dominic.movieswatch.adapters.MoviePagerAdapter
+import com.dominic.movieswatch.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class HomePage : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+
+    private lateinit var navController: NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -27,6 +33,7 @@ class HomePage : AppCompatActivity() {
             insets
         }
         Log.d("MainActivity", "done")
+
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
@@ -45,7 +52,6 @@ class HomePage : AppCompatActivity() {
                 else -> false
             }
         }
-        Log.d("MainActivity", "not called")
         findViewById<ImageView>(R.id.btn_back_to_main).setOnClickListener {
             onBackPressed()
         }

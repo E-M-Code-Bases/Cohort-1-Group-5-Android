@@ -9,9 +9,11 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
+
     @GET("search/movie")
     suspend fun searchMovies(@Query("api_key") apiKey: String, @Query("query") query: String): Response<MoviesResponse>
-    @GET("/movie/NowPlaying")
+   
+    @GET("/movie/now_playing")
     suspend fun getNowPlaying(@Query("api_key") apiKey: String, i: Int): Response<List<MoviesResponse>>
 
     @GET("movie/popular")
@@ -36,3 +38,4 @@ interface ApiService {
     @GET("movie/{movieId}/trailers")
     suspend fun getMovieTrailer(@Path("movieId") movieId: Int): Trailer
 }
+
