@@ -1,6 +1,6 @@
 package com.dominic.movieswatch.viewmodel
 
-import androidx.lifecycle.LiveData
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -34,7 +34,7 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
                     popularMovies.postValue(response.body())
                 }
             } catch (e: Exception) {
-                // Handle the exception
+                Log.e("", "Error fetching popular movies", e)
             }
         }
     }
@@ -47,7 +47,7 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
                     topRatedMovies.postValue(response.body())
                 }
             } catch (e: Exception) {
-                // Handle the exception
+                Log.e("", "Error fetching top rated movies ", e)
             }
         }
     }
@@ -60,7 +60,7 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
                     upcomingMovies.postValue(response.body())
                 }
             } catch (e: Exception) {
-                // Handle the exception
+                Log.e("", "Error fetching upcoming movies", e)
             }
         }
     }
@@ -73,7 +73,7 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
                     nowPlayingMovies.postValue(response.body())
                 }
             } catch (e: Exception) {
-                // Handle the exception
+                Log.e("", "Error fetching nowPlaying movies", e)
             }
         }
     }
@@ -85,7 +85,8 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
                 if (response.isSuccessful) {
                     trailers.postValue(response.body())
                 }
-            } catch (e: Exception) {
+            } catch (e: Error) {
+                Log.e("", "Error fetching trailers", e)
 
             }
         }
