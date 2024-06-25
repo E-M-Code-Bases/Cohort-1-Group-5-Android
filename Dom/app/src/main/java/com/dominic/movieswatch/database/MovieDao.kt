@@ -8,18 +8,16 @@ import com.dominic.movieswatch.model.Movie
 
 @Dao
 interface MovieDao {
-
-
-    @Query("SELECT * FROM movie WHERE isFavorite = 1")
+    @Query("SELECT * FROM movies WHERE id = 1")
     fun getFavoriteMovies(): LiveData<List<Movie>>
 
-    @Query("UPDATE movie SET isFavorite = 1 WHERE id = :movieId")
+    @Query("UPDATE movies SET adult = 1 WHERE id = :movieId")
     suspend fun markAsFavorite(movieId: Int)
 
-    @Query("UPDATE movie SET isFavorite = 0 WHERE id = :movieId")
+    @Query("UPDATE movies SET adult = 0 WHERE id = :movieId")
     suspend fun removeFromFavorites(movieId: Int)
 
-    @Query("SELECT * FROM movie WHERE category = 'now_watching'")
+    @Query("SELECT * FROM movies WHERE overview = 'now_watching'")
     fun getNowWatchingMovies(): LiveData<List<Movie>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

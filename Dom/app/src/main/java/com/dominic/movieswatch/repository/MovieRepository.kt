@@ -9,15 +9,13 @@ import retrofit2.Response
 
 
 class MovieRepository(private val apiService: ApiService,private val movieDao: MovieDao) {
-    suspend fun getUpcoming(apiKey: String) = apiService.getNowPlaying(apiKey,1)
+
+/*    //suspend fun getUpcoming(apiKey: String) = apiService.getNowPlaying(apiKey,1)
     suspend fun addFavoriteMovie(movie: Movie) = movieDao.addFavoriteMovie(movie)
     fun getFavoriteMovies() = movieDao.getFavoriteMovies()
     suspend fun removeFavoriteMovie(movie: Movie) = movieDao.removeFavoriteMovie(movie)
 
 
-    suspend fun getNowPlaying(apiKey: String): Response<List<MoviesResponse>>  {
-        return apiService.getNowPlaying(apiKey,1)
-    }
 
     suspend fun getPopularMovies(apiKey: String): Response<List<MoviesResponse>> {
         return apiService.getPopularMovies(apiKey, 1)
@@ -34,4 +32,5 @@ class MovieRepository(private val apiService: ApiService,private val movieDao: M
     suspend fun getTrailers(apiKey: String): Response<List<MoviesResponse>> {
         return apiService.getTrailers(apiKey, 1)
     }
+*/
 }
