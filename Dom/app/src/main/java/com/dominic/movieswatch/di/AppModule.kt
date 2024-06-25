@@ -1,74 +1,68 @@
 package com.dominic.movieswatch.di
 
-import com.dominic.movieswatch.api.ApiService
-import com.dominic.movieswatch.database.AppDatabase
-import com.dominic.movieswatch.repository.MovieRepository
-import com.dominic.movieswatch.viewmodel.FavoriteViewModel
-import com.dominic.movieswatch.viewmodel.MovieDetailsViewModel
-import com.dominic.movieswatch.viewmodel.MovieViewModel
-import com.dominic.movieswatch.viewmodel.SearchViewModel
+import com.dominic.movieswatch.utils.API_KEY
+import com.dominic.movieswatch.utils.baseUrl
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.core.module.Module
-import org.koin.dsl.module
+import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import com.dominic.movieswatch.api.ApiService as ApiService1
 
 interface AppModuleInterface {
-    fun getRetrofitInstance(api_key: String): ApiService
+    fun getRetrofitInstance(api_key: String): ApiService1
 }
 
 class AppModule : AppModuleInterface {
 
-    override fun getRetrofitInstance(api_key: String): ApiService {
-        val baseUrl = "https://api.themoviedb.org/3/"
+    override fun getRetrofitInstance(api_key: String): ApiService1 {
 
-        val loggingInterceptor = HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
-        }
+        val interceptor = TokenInterceptor(API_KEY)
 
-        val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
-            .addInterceptor { chain ->
-                val original = chain.request()
-                val originalHttpUrl = original.url
-                val url = originalHttpUrl.newBuilder()
-                    .addQueryParameter("API_KEY", api_key)
-                    .build()
-                val requestBuilder = original.newBuilder().url(url)
-                val request = requestBuilder.build()
-                chain.proceed(request)
-            }
+        val client = OkHttpClient.Builder()
+            .addInterceptor(interceptor)
             .build()
 
         val retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
-            .client(okHttpClient)
+            .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        return retrofit.create(ApiService::class.java)
+        val api : ApiService1 by lazy {
+            retrofit.create(ApiService1::class.java)
+        }
+        return api
     }
 }
+class TokenInterceptor(private val api_key: String): Interceptor {
+    override fun intercept(chain: Interceptor.Chain): Response {
+        val req =
+            chain.request()
+                .newBuilder()
+                .addHeader("Authorization", "Bearer $api_key").build()
+        return chain.proceed(req)
+    }
 
-val networkModule: Module = module {
-    single { (api_key: String) -> AppModule().getRetrofitInstance(api_key) }
-}
 
-val repositoryModule: Module = module {
-    single { MovieRepository(get(), get()) }
-}
+  /*  val networkModule: Module = module {
+        single { (api_key: String) -> AppModule().getRetrofitInstance(api_key) }
+    }
 
-val viewModelModule: Module = module {
-    viewModel { MovieViewModel(get()) }
-    viewModel { SearchViewModel(get()) }
-    viewModel { FavoriteViewModel(get()) }
-    viewModel { MovieDetailsViewModel(get())  }
-}
-val databaseModules: Module = module {
-    single { AppDatabase.getDatabase(get()) }
-    single { get<AppDatabase>().movieDao() }
-}
+    val repositoryModule: Module = module {
+        single { MovieRepository(get(), get()) }
+    }
 
-val appModules = listOf(networkModule, repositoryModule, viewModelModule, databaseModules)
+    val viewModelModule: Module = module {
+        viewModel { MovieViewModel(get()) }
+        viewModel { SearchViewModel(get()) }
+        viewModel { FavoriteViewModel(get()) }
+    }
+    val databaseModules: Module = module {
+        single { AppDatabase.getDatabase(get()) }
+        single { get<AppDatabase>().movieDao() }
+    }
+
+    val appModules = listOf(networkModule, repositoryModule, viewModelModule, databaseModules)
+ */
+}

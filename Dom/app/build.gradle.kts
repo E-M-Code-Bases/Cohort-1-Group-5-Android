@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id ("kotlin-kapt")
-    id ("androidx.navigation.safeargs.kotlin")
+  //  id ("com.google.devtools.ksp").version("1.9.10-1.0.13")apply false
 }
 
 android {
@@ -63,7 +63,9 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.gridlayout)
-    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    implementation (libs.glide)
+    implementation (libs.kotlin.stdlib)
+
 
     implementation(libs.androidx.databinding.runtime)
     testImplementation(libs.junit)
@@ -92,12 +94,5 @@ dependencies {
     implementation (libs.androidx.room.runtime)
     kapt (libs.androidx.room.compiler)
     implementation (libs.androidx.room.ktx)
-
-    implementation (libs.glide)
-    annotationProcessor (libs.compiler)
-
-    implementation (libs.androidx.recyclerview)
-    // For control over item selection of both touch and mouse driven selection
-    implementation (libs.androidx.recyclerview.selection)
 }
 
