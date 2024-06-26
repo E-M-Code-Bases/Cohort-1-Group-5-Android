@@ -13,9 +13,8 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
     val popularMovies = MutableLiveData<List<MoviesResponse>>()
     val topRatedMovies=MutableLiveData<List<MoviesResponse>>()
     val upcomingMovies=MutableLiveData<List<MoviesResponse>>()
-    val trailers=MutableLiveData<List<MoviesResponse>>()
+    val trailers=MutableLiveData<List<MoviesResponse>>()}
 
-    private val apiKey = "97e4139678874939dde9e3da738d82f1"}
 /*
     init {
         fetchPopularMovies()

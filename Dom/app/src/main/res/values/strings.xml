@@ -8,4 +8,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="find_the_most_recent_movies_and_more">Find The most Recent Movies and more...</string>
     <string name="nowplaying">NowPlaying</string>
+    <string name="favorite_icon">Favorite Icon</string>
+    <string name="movie_poster">movie poster</string>
 </resources>

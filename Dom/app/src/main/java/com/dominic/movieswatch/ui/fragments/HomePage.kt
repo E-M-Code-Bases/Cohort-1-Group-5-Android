@@ -1,4 +1,4 @@
-package com.dominic.movieswatch.ui
+package com.dominic.movieswatch.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -21,6 +21,8 @@ class HomePage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.fragment_home)
+
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.home)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())

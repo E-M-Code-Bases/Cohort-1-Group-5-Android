@@ -9,7 +9,7 @@ import com.dominic.movieswatch.repository.MovieRepository
 import kotlinx.coroutines.launch
 
 class MovieDetailsViewModel(private val repository: MovieRepository) : ViewModel() {
-
+/*
     private val _movieDetails = MutableLiveData<Movie>()
     val movieDetails: LiveData<Movie> get() = _movieDetails
 
@@ -43,5 +43,5 @@ class MovieDetailsViewModel(private val repository: MovieRepository) : ViewModel
 
     private fun playTrailer(url: String) {
         // Logic to play the trailer
-    }
+    }*/
 }

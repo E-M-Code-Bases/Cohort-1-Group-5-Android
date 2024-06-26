@@ -1,6 +1,7 @@
 package com.dominic.movieswatch.adapters
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
@@ -10,19 +11,23 @@ import com.dominic.movieswatch.R
 import com.dominic.movieswatch.databinding.MovieItemsBinding
 import com.dominic.movieswatch.model.Movie
 
+private const val TAG = "adapter"
 class MovieAdapter(private var movies: List<Movie>) :
 
     RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
-    inner class MovieViewHolder(val binding: MovieItemsBinding) :
+    inner class MovieViewHolder(private val binding: MovieItemsBinding) :
 
         RecyclerView.ViewHolder(binding.root) {
 
         //fetchmovies
         fun bind(movie: Movie) {
-//            Glide.with(binding.moviePoster.context)
-//                .load(movie.posterPath)
-//                .into(binding.moviePoster)
+            val url = "https://image.tmdb.org/t/p/w500"+movie.poster_path
+            Log.d(TAG, "poster -> $url")
+            Glide.with(binding.moviePoster.context)
+                .load(url)
+                .placeholder(R.drawable.baseline_image_search_24)
+                .into(binding.moviePoster)
             binding.title.text = movie.title
             binding.root.setOnClickListener {
 

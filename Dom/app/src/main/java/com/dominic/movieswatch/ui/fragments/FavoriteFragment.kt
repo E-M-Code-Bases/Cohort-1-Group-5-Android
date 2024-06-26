@@ -1,4 +1,4 @@
-package com.dominic.movieswatch.ui
+package com.dominic.movieswatch.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
