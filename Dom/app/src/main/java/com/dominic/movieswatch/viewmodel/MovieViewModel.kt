@@ -13,16 +13,13 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
     val popularMovies = MutableLiveData<List<MoviesResponse>>()
     val topRatedMovies=MutableLiveData<List<MoviesResponse>>()
     val upcomingMovies=MutableLiveData<List<MoviesResponse>>()
-    val nowPlayingMovies=MutableLiveData<List<MoviesResponse>>()
-    val trailers=MutableLiveData<List<MoviesResponse>>()
+    val trailers=MutableLiveData<List<MoviesResponse>>()}
 
-    private val apiKey = "97e4139678874939dde9e3da738d82f1"
-
+/*
     init {
         fetchPopularMovies()
         fetchTopRatedMovies()
         fetchUpcomingMovies()
-        fetchNowPlayingMovies()
         fetchTrailers()
     }
 
@@ -65,18 +62,7 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
         }
     }
 
-    private fun fetchNowPlayingMovies() {
-        viewModelScope.launch {
-            try {
-                val response = repository.getNowPlaying(apiKey)
-                if (response.isSuccessful) {
-                    nowPlayingMovies.postValue(response.body())
-                }
-            } catch (e: Exception) {
-                Log.e("", "Error fetching nowPlaying movies", e)
-            }
-        }
-    }
+
 
     private fun fetchTrailers() {
         viewModelScope.launch {
@@ -90,5 +76,5 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
 
             }
         }
-    }
-}
+    }/
+}*/

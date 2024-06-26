@@ -1,39 +1,34 @@
-package com.dominic.movieswatch.ui
+package com.dominic.movieswatch.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.navigation.NavController
 import androidx.viewpager2.widget.ViewPager2
 import com.dominic.movieswatch.R
 import com.dominic.movieswatch.adapters.MoviePagerAdapter
-import com.dominic.movieswatch.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class HomePage : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
 
-    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.fragment_home)
 
+
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.home)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        Log.d("MainActivity", "done")
-
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
@@ -43,12 +38,16 @@ class HomePage : AppCompatActivity() {
                     startActivity(intent)
                     true
                 }
+
                 R.id.navigation_search -> {
+                    setContentView(R.layout.fragment_search)
                     true
                 }
+
                 R.id.navigation_my_library -> {
                     true
                 }
+
                 else -> false
             }
         }

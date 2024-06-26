@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp"
-        tools:context=".ui.MovieDetailsFragment">
+        tools:context=".ui.fragments.MovieDetailsFragment">
 
         <ScrollView
             android:id="@+id/scrollable"
@@ -35,11 +35,11 @@
                     android:layout_width="150dp"
                     android:layout_height="200dp"
                     android:layout_marginBottom="16dp"
+                    android:contentDescription="@string/movie_poster"
                     app:layout_constraintBottom_toTopOf="@+id/titleLinearLayout"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:imageUrl="@{movie.posterPath}"
                     tools:srcCompat="@drawable/ic_placeholder_image" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -72,7 +72,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginEnd="30dp"
-                        android:contentDescription="Favorite Icon"
+                        android:contentDescription="@string/favorite_icon"
                         android:padding="8dp"
                         android:src="@drawable/ic_favorite"
                         app:layout_constraintEnd_toEndOf="parent"

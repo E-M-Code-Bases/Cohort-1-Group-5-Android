@@ -2,39 +2,42 @@ package com.dominic.movieswatch.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
+import androidx.room.ColumnInfo
+import java.io.Serializable
+import androidx.room.TypeConverter
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
-@Entity(tableName = "movie")
+@Entity(tableName = "movies")
 data class Movie(
-    @SerializedName("adult")
-    val adult: Boolean,
-    @SerializedName("backdrop_path")
-    val backdropPath: String,
-    @SerializedName("genre_ids")
-    val genreIds: List<Int>,
-    @PrimaryKey
-    @SerializedName("id")
-    val id: Int,
-    @SerializedName("original_language")
-    val originalLanguage: String,
-    @SerializedName("original_title")
-    val originalTitle: String,
-    @SerializedName("overview")
-    val overview: String,
-    @SerializedName("popularity")
-    val popularity: Double,
-    @SerializedName("poster_path")
-    val posterPath: String,
-    @SerializedName("release_date")
-    val releaseDate: String,
-    @SerializedName("title")
-    val title: String,
-    @SerializedName("video")
-    val video: Boolean,
-    @SerializedName("vote_average")
-    val voteAverage: Double,
-    @SerializedName("vote_count")
-    val voteCount: Int
-) {
-    fun getPosterUrl() = "https://image.tmdb.org/t/p/w500/$posterPath"
+    @PrimaryKey val id: Int,
+    @ColumnInfo(name = "adult") val adult: Boolean,
+    @ColumnInfo(name = "backdrop_path") val backdropPath: String,
+    @ColumnInfo(name = "genre_ids") val genreIds: List<Int>, // Room does not support Lists directly
+    @ColumnInfo(name = "original_language") val originalLanguage: String,
+    @ColumnInfo(name = "original_title") val originalTitle: String,
+    @ColumnInfo(name = "overview") val overview: String,
+    @ColumnInfo(name = "popularity") val popularity: Double,
+    @ColumnInfo(name = "poster_path") val poster_path: String,
+    @ColumnInfo(name = "release_date") val releaseDate: String,
+    @ColumnInfo(name = "title") val title: String,
+    @ColumnInfo(name = "video") val video: Boolean,
+    @ColumnInfo(name = "vote_average") val voteAverage: Double,
+    @ColumnInfo(name = "vote_count") val voteCount: Int
+) : Serializable
+
+class Converters {
+    @TypeConverter
+    fun fromGenreIdsList(genreIds: List<Int>): String {
+        val gson = Gson()
+        val type = object : TypeToken<List<Int>>() {}.type
+        return gson.toJson(genreIds, type)
+    }
+
+    @TypeConverter
+    fun toGenreIdsList(genreIdsString: String): List<Int> {
+        val gson = Gson()
+        val type = object : TypeToken<List<Int>>() {}.type
+        return gson.fromJson(genreIdsString, type)
+    }
 }
