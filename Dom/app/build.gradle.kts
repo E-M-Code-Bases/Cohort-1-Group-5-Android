@@ -63,8 +63,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.gridlayout)
-    implementation ("com.github.bumptech.glide:glide:4.12.0")
-
     implementation(libs.androidx.databinding.runtime)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

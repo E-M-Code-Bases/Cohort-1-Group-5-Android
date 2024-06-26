@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.dominic.movieswatch.R
 import com.dominic.movieswatch.databinding.MovieItemsBinding
 import com.dominic.movieswatch.model.Movie
-class MovieAdapter(private val movies: List<Movie>) :
+class MovieAdapter(private val movies: (Any) -> Unit) :
 
     RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
