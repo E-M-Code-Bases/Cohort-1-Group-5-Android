@@ -46,3 +46,6 @@ class FavoriteFragment : Fragment() {
 //TODO implement navigation to screen ya movie details
     }
 }
+
+
+
