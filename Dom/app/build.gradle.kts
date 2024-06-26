@@ -63,9 +63,9 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.gridlayout)
+
     implementation (libs.glide)
     implementation (libs.kotlin.stdlib)
-
 
     implementation(libs.androidx.databinding.runtime)
     testImplementation(libs.junit)
