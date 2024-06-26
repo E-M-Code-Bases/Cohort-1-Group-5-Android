@@ -1,4 +1,4 @@
-package com.dominic.movieswatch.ui
+package com.dominic.movieswatch.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -46,6 +46,3 @@ class FavoriteFragment : Fragment() {
 //TODO implement navigation to screen ya movie details
     }
 }
-
-
-

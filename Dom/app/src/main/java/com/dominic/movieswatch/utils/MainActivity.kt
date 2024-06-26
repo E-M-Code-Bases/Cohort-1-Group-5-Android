@@ -10,7 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.dominic.movieswatch.R
 import com.dominic.movieswatch.databinding.ActivityMainBinding
-import com.dominic.movieswatch.ui.HomePage
+import com.dominic.movieswatch.ui.fragments.HomePage
 
 
 class MainActivity : AppCompatActivity() {

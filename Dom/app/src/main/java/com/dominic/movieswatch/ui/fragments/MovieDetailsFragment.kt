@@ -1,23 +1,11 @@
-package com.dominic.movieswatch.ui
+package com.dominic.movieswatch.ui.fragments
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.navigation.fragment.navArgs
-import com.dominic.movieswatch.R
-import com.dominic.movieswatch.databinding.FragmentMovieDetailsBinding
-import com.dominic.movieswatch.viewmodel.MovieDetailsViewModel
 
 class MovieDetailsFragment : Fragment() {
 
-    private lateinit var binding: FragmentMovieDetailsBinding
+    /*  private lateinit var binding: FragmentMovieDetailsBinding
     private val viewModel: MovieDetailsViewModel by viewModels()
-    private val args: MovieDetailsFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,7 +21,6 @@ class MovieDetailsFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        val movieId = args.movieId
         viewModel.loadMovieDetails(movieId)
 
         viewModel.movieDetails.observe(viewLifecycleOwner, Observer { movie ->
@@ -53,5 +40,6 @@ class MovieDetailsFragment : Fragment() {
         val iconRes = if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
         binding.favoriteIcon.setImageResource(iconRes)
     }
-}
+}*/
 
+}

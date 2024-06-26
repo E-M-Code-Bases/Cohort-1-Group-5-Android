@@ -8,7 +8,7 @@
     android:padding="16dp"
     android:background="@drawable/background"
     android:id="@+id/home"
-    tools:context=".ui.HomePage">
+    tools:context=".ui.fragments.HomePage">
 
     <!-- Search Bar -->
     <LinearLayout

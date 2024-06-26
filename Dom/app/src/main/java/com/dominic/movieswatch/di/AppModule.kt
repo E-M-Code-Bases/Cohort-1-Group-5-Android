@@ -1,5 +1,6 @@
 package com.dominic.movieswatch.di
 
+import com.dominic.movieswatch.api.ApiService
 import com.dominic.movieswatch.utils.API_KEY
 import com.dominic.movieswatch.utils.baseUrl
 import okhttp3.Interceptor
@@ -7,15 +8,14 @@ import okhttp3.OkHttpClient
 import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import com.dominic.movieswatch.api.ApiService as ApiService1
 
 interface AppModuleInterface {
-    fun getRetrofitInstance(api_key: String): ApiService1
+    fun getRetrofitInstance(api_key: String): ApiService
 }
 
 class AppModule : AppModuleInterface {
 
-    override fun getRetrofitInstance(api_key: String): ApiService1 {
+    override fun getRetrofitInstance(api_key: String): ApiService {
 
         val interceptor = TokenInterceptor(API_KEY)
 
@@ -29,8 +29,8 @@ class AppModule : AppModuleInterface {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        val api : ApiService1 by lazy {
-            retrofit.create(ApiService1::class.java)
+        val api : ApiService by lazy {
+            retrofit.create(ApiService::class.java)
         }
         return api
     }
@@ -40,7 +40,8 @@ class TokenInterceptor(private val api_key: String): Interceptor {
         val req =
             chain.request()
                 .newBuilder()
-                .addHeader("Authorization", "Bearer $api_key").build()
+                .addHeader("Authorization", "Bearer $api_key")
+                .build()
         return chain.proceed(req)
     }
 
