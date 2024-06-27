@@ -1,6 +1,5 @@
 package com.dominic.movieswatch.repository
 
-import com.dominic.movieswatch.api.ApiResponse
 import com.dominic.movieswatch.api.ApiService
 import com.dominic.movieswatch.database.MovieDao
 import com.dominic.movieswatch.model.Movie

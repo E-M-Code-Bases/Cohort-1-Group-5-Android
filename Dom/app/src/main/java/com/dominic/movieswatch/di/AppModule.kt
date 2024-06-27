@@ -38,7 +38,7 @@ class AppModule : AppModuleInterface {
                 val requestBuilder = original.newBuilder().url(url)
                 val request = requestBuilder.build()
                 chain.proceed(request)
-            }
+            }]
             .build()
 
         val retrofit = Retrofit.Builder()
