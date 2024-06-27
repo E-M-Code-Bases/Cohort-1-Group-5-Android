@@ -43,7 +43,7 @@ class NowPlaying : Fragment() {
         ) { nowPlayingMovies ->
             movieAdapter = MovieAdapter(nowPlayingMovies)
             binding.nowPlayingRecView.apply {
-                layoutManager = GridLayoutManager(context, 2)
+                layoutManager = GridLayoutManager(context, 3)
                 adapter = movieAdapter
 
             }

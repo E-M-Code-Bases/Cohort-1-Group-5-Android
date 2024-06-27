@@ -69,7 +69,7 @@
 
     <fragment
         android:id="@+id/popularMoviesFragment"
-        android:name="com.example.domflex.ui.PopularMoviesFragment"
+        android:name="com.example.domflex.ui.Popular"
         android:label="PopularMoviesFragment" />
 
 </navigation>
