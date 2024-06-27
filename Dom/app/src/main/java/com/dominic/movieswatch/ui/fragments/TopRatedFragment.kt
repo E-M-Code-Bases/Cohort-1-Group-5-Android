@@ -4,12 +4,12 @@ import TRProvider
 import TopRatedViewModel
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.gridlayout.widget.GridLayout
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dominic.movieswatch.R
 import com.dominic.movieswatch.adapters.MovieAdapter
@@ -34,18 +34,29 @@ class TopRatedFragment : Fragment() {
         val topRatedViewModel: TopRatedViewModel by viewModels {
             TRProvider(repository)
         }
+        tRAdapter = MovieAdapter(emptyList()) { movie ->
+            val bundle = Bundle().apply {
+                putString("movieTitle", movie.title)
+            }
+            findNavController().navigate(R.id.action_global_movieDetails, bundle)
+        }
+        binding.recyclerViewTR.apply {
+            layoutManager = GridLayoutManager(context, 3)
+            adapter = tRAdapter
+        }
         topRatedViewModel.topRatedMovies.observe(
             viewLifecycleOwner
         ) { topRatedMovies ->
 
-            tRAdapter = MovieAdapter(topRatedMovies)
-            binding.recyclerViewTR.apply {
-                layoutManager = GridLayoutManager(context, 2)
-                adapter = tRAdapter
-            }
+            tRAdapter.updateMovies(topRatedMovies)
+
 
         }
 
         return binding.root
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.recyclerViewTR.adapter = null
     }
 }
