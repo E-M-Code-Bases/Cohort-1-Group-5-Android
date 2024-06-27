@@ -13,7 +13,7 @@ interface ApiService {
     suspend fun getPopularMovies(@Query("page")i: Int=1): Response<MoviesResponse>
 
     @GET("movie/top_rated")
-    suspend fun getTopRatedMovies(@Query("page") i: Int=1): Response<MoviesResponse>
+    suspend fun fetchTopRatedMovies(@Query("page") i: Int=1): Response<MoviesResponse>
 
     @GET("movie/upcoming")
     suspend fun getUpcomingMovies(@Query("page") i: Int=1): Response<MoviesResponse>
