@@ -1,6 +1,6 @@
 package com.dominic.movieswatch.viewmodel
-
-import androidx.lifecycle.LiveData
+/*
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,16 +13,13 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
     val popularMovies = MutableLiveData<List<MoviesResponse>>()
     val topRatedMovies=MutableLiveData<List<MoviesResponse>>()
     val upcomingMovies=MutableLiveData<List<MoviesResponse>>()
-    val nowPlayingMovies=MutableLiveData<List<MoviesResponse>>()
-    val trailers=MutableLiveData<List<MoviesResponse>>()
+    val trailers=MutableLiveData<List<MoviesResponse>>()}
 
-    private val apiKey = "97e4139678874939dde9e3da738d82f1"
 
     init {
         fetchPopularMovies()
         fetchTopRatedMovies()
         fetchUpcomingMovies()
-        fetchNowPlayingMovies()
         fetchTrailers()
     }
 
@@ -34,7 +31,7 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
                     popularMovies.postValue(response.body())
                 }
             } catch (e: Exception) {
-                // Handle the exception
+                Log.e("", "Error fetching popular movies", e)
             }
         }
     }
@@ -47,7 +44,7 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
                     topRatedMovies.postValue(response.body())
                 }
             } catch (e: Exception) {
-                // Handle the exception
+                Log.e("", "Error fetching top rated movies ", e)
             }
         }
     }
@@ -60,23 +57,12 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
                     upcomingMovies.postValue(response.body())
                 }
             } catch (e: Exception) {
-                // Handle the exception
+                Log.e("", "Error fetching upcoming movies", e)
             }
         }
     }
 
-    private fun fetchNowPlayingMovies() {
-        viewModelScope.launch {
-            try {
-                val response = repository.getNowPlaying(apiKey)
-                if (response.isSuccessful) {
-                    nowPlayingMovies.postValue(response.body())
-                }
-            } catch (e: Exception) {
-                // Handle the exception
-            }
-        }
-    }
+
 
     private fun fetchTrailers() {
         viewModelScope.launch {
@@ -85,9 +71,10 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
                 if (response.isSuccessful) {
                     trailers.postValue(response.body())
                 }
-            } catch (e: Exception) {
+            } catch (e: Error) {
+                Log.e("", "Error fetching trailers", e)
 
             }
         }
     }
-}
+}*/

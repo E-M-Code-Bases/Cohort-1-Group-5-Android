@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id ("kotlin-kapt")
+  //  id ("com.google.devtools.ksp").version("1.9.10-1.0.13")apply false
 }
 
 android {
@@ -62,11 +63,14 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.gridlayout)
+
+    implementation (libs.glide)
+    implementation (libs.kotlin.stdlib)
+
     implementation(libs.androidx.databinding.runtime)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
     implementation (libs.core)
     // Coroutines
     implementation (libs.kotlinx.coroutines.core)

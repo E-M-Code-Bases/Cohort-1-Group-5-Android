@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homePage">
+    app:startDestination="@id/nowPlaying">
 
     <fragment
         android:id="@+id/topRatedFragment"
@@ -17,12 +17,12 @@
         tools:layout="@layout/fragment_now_playing" />
     <fragment
         android:id="@+id/search"
-        android:name="com.dominic.movieswatch.ui.Search"
+        android:name="com.dominic.movieswatch.ui.fragments.Search"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/favorite"
-        android:name="com.dominic.movieswatch.ui.FavoriteFragment"
+        android:name="com.dominic.movieswatch.ui.fragments.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
     <fragment
@@ -34,7 +34,7 @@
         app:startDestination="@id/homePage">
         <activity
             android:id="@+id/homePage"
-            android:name="com.dominic.movieswatch.ui.HomePage"
+            android:name="com.dominic.movieswatch.ui.fragments.HomePage"
             android:label="HomePage" />
         <action
             android:id="@+id/action_global_topRatedFragment"
@@ -60,11 +60,16 @@
     </navigation>
     <fragment
         android:id="@+id/movieDetails"
-        android:name="com.dominic.movieswatch.ui.MovieDetails"
-        android:label="fragment_movie_details"
-        tools:layout="@layout/fragment_movie_details" />
+        android:name="com.dominic.movieswatch.ui.fragments.MovieDetailsFragment"
+        android:label="fragment_movie_details">
+        <argument
+            android:name="movieId"
+            app:argType="integer" />
+    </fragment>
+
     <fragment
         android:id="@+id/popularMoviesFragment"
-        android:name="com.example.domflex.ui.PopularMoviesFragment"
+        android:name="com.example.domflex.ui.Popular"
         android:label="PopularMoviesFragment" />
+
 </navigation>

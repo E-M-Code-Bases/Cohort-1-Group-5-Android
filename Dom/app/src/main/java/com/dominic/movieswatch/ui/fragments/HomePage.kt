@@ -1,8 +1,7 @@
-package com.dominic.movieswatch.ui
+package com.dominic.movieswatch.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -16,17 +15,20 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class HomePage : AppCompatActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.fragment_home)
+
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.home)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        Log.d("MainActivity", "done")
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
@@ -36,16 +38,19 @@ class HomePage : AppCompatActivity() {
                     startActivity(intent)
                     true
                 }
+
                 R.id.navigation_search -> {
+                    setContentView(R.layout.fragment_search)
                     true
                 }
+
                 R.id.navigation_my_library -> {
                     true
                 }
+
                 else -> false
             }
         }
-        Log.d("MainActivity", "not called")
         findViewById<ImageView>(R.id.btn_back_to_main).setOnClickListener {
             onBackPressed()
         }

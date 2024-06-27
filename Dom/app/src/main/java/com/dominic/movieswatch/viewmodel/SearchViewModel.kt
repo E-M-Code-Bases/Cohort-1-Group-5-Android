@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class SearchViewModel(private val repository: MovieRepository) : ViewModel() {
 
-    private val _searchResults = MutableLiveData<List<Movie>>()
+    /*private val _searchResults = MutableLiveData<List<Movie>>()
     val searchResults: LiveData<List<Movie>> get() = _searchResults
 
     private val _error = MutableLiveData<String>()
@@ -27,5 +27,5 @@ class SearchViewModel(private val repository: MovieRepository) : ViewModel() {
         } catch (e: Exception) {
             _error.postValue("Exception: ${e.message}")
         }
-    }
+    }*/
 }

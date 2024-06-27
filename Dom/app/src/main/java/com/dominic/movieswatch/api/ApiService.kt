@@ -6,24 +6,25 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApiService {
-    @GET("search/movie")
-    suspend fun searchMovies(@Query("api_key") apiKey: String, @Query("query") query: String): Response<MoviesResponse>
-    @GET("/movie/NowPlaying")
-    suspend fun getNowPlaying(@Query("api_key") apiKey: String, i: Int): Response<List<MoviesResponse>>
+    @GET("movie/now_playing")
+    suspend fun getNowPlaying(@Query("page") i: Int=1): Response<MoviesResponse>
 
     @GET("movie/popular")
+<<<<<<< HEAD
     suspend fun getPopularMovies(@Query("api_key") apiKey: String): Response<List<MoviesResponse>>;
+=======
+    suspend fun getPopularMovies(@Query("page")i: Int=1): Response<MoviesResponse>
+>>>>>>> d35306b5b400b66e89dd14b00f2491429e1bd68c
 
     @GET("movie/top_rated")
-    suspend fun getTopRatedMovies(@Query("api_key") apiKey: String, i: Int): Response<List<MoviesResponse>>
+    suspend fun getTopRatedMovies(@Query("page") i: Int=1): Response<MoviesResponse>
 
     @GET("movie/upcoming")
-    suspend fun getUpcomingMovies(@Query("api_key") apiKey: String, i: Int): Response<List<MoviesResponse>>
+    suspend fun getUpcomingMovies(@Query("page") i: Int=1): Response<MoviesResponse>
 
 
     @GET("movie/trailers")
-    suspend fun getTrailers( @Query("api_key") apiKey: String):Response<List<MoviesResponse>>
+    suspend fun getTrailers(@Query("page") i: Int=1): Response<MoviesResponse>
 
-    @GET("movie/reviews")
-    suspend fun getReviews(@Query("api_key") apiKey: String):Response<List<MoviesResponse>>
 }
+
