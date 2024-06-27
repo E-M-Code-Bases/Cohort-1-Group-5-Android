@@ -1,5 +1,5 @@
 package com.dominic.movieswatch.viewmodel
-
+/*
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,7 +15,7 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
     val upcomingMovies=MutableLiveData<List<MoviesResponse>>()
     val trailers=MutableLiveData<List<MoviesResponse>>()}
 
-/*
+
     init {
         fetchPopularMovies()
         fetchTopRatedMovies()
@@ -76,5 +76,5 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
 
             }
         }
-    }/
+    }
 }*/
