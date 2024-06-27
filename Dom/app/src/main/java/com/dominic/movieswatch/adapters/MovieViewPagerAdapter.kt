@@ -6,7 +6,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.dominic.movieswatch.ui.fragments.NowPlaying
 import com.dominic.movieswatch.ui.fragments.TopRatedFragment
 import com.dominic.movieswatch.ui.fragments.UpcomingMoviesFragment
-import com.example.domflex.ui.PopularMoviesFragment
+import com.example.domflex.ui.Popular
 
 class MoviePagerAdapter(fragmentActivity: FragmentActivity) :
     FragmentStateAdapter(fragmentActivity) {
@@ -18,10 +18,10 @@ class MoviePagerAdapter(fragmentActivity: FragmentActivity) :
     override fun createFragment(position: Int): Fragment {
         return when (position) {
             0 -> NowPlaying()
-            1 -> PopularMoviesFragment()
+            1 -> Popular()
             2 -> TopRatedFragment()
             3 -> UpcomingMoviesFragment()
-            else -> PopularMoviesFragment()
+            else -> Popular()
         }
     }
 }
