@@ -10,11 +10,7 @@ interface ApiService {
     suspend fun getNowPlaying(@Query("page") i: Int=1): Response<MoviesResponse>
 
     @GET("movie/popular")
-<<<<<<< HEAD
-    suspend fun getPopularMovies(@Query("api_key") apiKey: String): Response<List<MoviesResponse>>;
-=======
     suspend fun getPopularMovies(@Query("page")i: Int=1): Response<MoviesResponse>
->>>>>>> d35306b5b400b66e89dd14b00f2491429e1bd68c
 
     @GET("movie/top_rated")
     suspend fun getTopRatedMovies(@Query("page") i: Int=1): Response<MoviesResponse>
@@ -27,4 +23,3 @@ interface ApiService {
     suspend fun getTrailers(@Query("page") i: Int=1): Response<MoviesResponse>
 
 }
-
