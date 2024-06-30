@@ -41,7 +41,7 @@ class Popular : Fragment() {
 
         popAdapter = MovieAdapter(emptyList()) { movie ->
             val bundle = Bundle().apply {
-                putString("movieTitle", movie.title)  // Pass the selected movie title to the next screen.
+                putString("movieTitle", movie.title)
             }
             findNavController().navigate(R.id.action_global_movieDetails, bundle)
         }
@@ -51,7 +51,6 @@ class Popular : Fragment() {
             adapter = popAdapter
         }
 
-        // Observe popular movies and update the adapter.
         popularViewModel.popularMovies.observe(viewLifecycleOwner) { popularMovies ->
             popAdapter.updateMovies(popularMovies)
             Toast.makeText(context, "Loaded ${popularMovies.size} movies", Toast.LENGTH_SHORT).show()
@@ -62,7 +61,7 @@ class Popular : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        // Clear the adapter to prevent memory leaks.
+
         binding.recyclerViewpopular.adapter = null
     }
 }
