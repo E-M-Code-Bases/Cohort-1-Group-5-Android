@@ -37,7 +37,7 @@
 
     <fragment
         android:id="@+id/popularMoviesFragment"
-        android:name="com.example.domflex.ui.Popular"
+        android:name="com.dominic.movieswatch.ui.fragments.Popular"
         android:label="Popular Movies" />
 
     <fragment
@@ -166,7 +166,7 @@
 
 <!--    <fragment-->
 <!--        android:id="@+id/popularMoviesFragment"-->
-<!--        android:name="com.example.domflex.ui.Popular"-->
+<!--        android:name="com.dominic.movieswatch.ui.fragments.Popular"-->
 <!--        android:label="PopularMoviesFragment" />-->
 
 <!--</navigation>-->
