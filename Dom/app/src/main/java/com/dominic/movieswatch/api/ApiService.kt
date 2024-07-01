@@ -26,4 +26,3 @@ interface ApiService {
     suspend fun getTrailers(@Query("page") i: Int=1): Response<MoviesResponse>
 
 }
-
