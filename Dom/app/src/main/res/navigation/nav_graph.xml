@@ -53,11 +53,6 @@
     <fragment
         android:id="@+id/popularMoviesFragment"
         android:name="com.dominic.movieswatch.ui.fragments.Popular"
-        android:label="Popular Movies">
-        <action
-            android:id="@+id/action_popular_to_movieDetails"
-            app:destination="@id/movieDetails" />
-    </fragment>
 
     <fragment
         android:id="@+id/movieDetails"
@@ -70,3 +65,4 @@
     </fragment>
 
 </navigation>
+

@@ -71,7 +71,6 @@
             android:padding="10dp"
             android:src="@drawable/searchicon"
             tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-
     </RelativeLayout>
 
     <com.google.android.material.tabs.TabLayout

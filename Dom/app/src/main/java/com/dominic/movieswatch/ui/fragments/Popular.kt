@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -19,6 +20,7 @@ import com.dominic.movieswatch.viewmodel.PopularProvider
 import com.dominic.movieswatch.viewmodel.PopularViewmodel
 
 class Popular : Fragment() {
+
     private lateinit var binding: FragmentPopularMoviesBinding
     private lateinit var popAdapter: MovieAdapter
 
@@ -27,8 +29,10 @@ class Popular : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentPopularMoviesBinding.inflate(inflater, container, false)
+
         val sharedPrefs = requireContext().getSharedPreferences(PREF, Context.MODE_PRIVATE)
         val apiKey = sharedPrefs.getString(API_KEY, "")!!
+
         val popRepo = PopRepo(apiKey)
 
         val popularViewModel: PopularViewmodel by viewModels {
@@ -49,6 +53,7 @@ class Popular : Fragment() {
 
         popularViewModel.popularMovies.observe(viewLifecycleOwner) { popularMovies ->
             popAdapter.updateMovies(popularMovies)
+            Toast.makeText(context, "Loaded ${popularMovies.size} movies", Toast.LENGTH_SHORT).show()
         }
 
         return binding.root
@@ -56,6 +61,7 @@ class Popular : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+
         binding.recyclerViewpopular.adapter = null
     }
 }
