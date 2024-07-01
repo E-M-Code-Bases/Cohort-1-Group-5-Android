@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,13 +8,21 @@
         android:id="@+id/topRatedFragment"
         android:name="com.dominic.movieswatch.ui.fragments.TopRatedFragment"
         android:label="Top Rated"
-        tools:layout="@layout/fragment_top_rated" />
+        tools:layout="@layout/fragment_top_rated">
+        <action
+            android:id="@+id/action_topRated_to_movieDetails"
+            app:destination="@id/movieDetails" />
+    </fragment>
 
     <fragment
         android:id="@+id/nowPlaying"
         android:name="com.dominic.movieswatch.ui.fragments.NowPlaying"
         android:label="Now Playing"
-        tools:layout="@layout/fragment_now_playing" />
+        tools:layout="@layout/fragment_now_playing">
+        <action
+            android:id="@+id/action_nowPlaying_to_movieDetails"
+            app:destination="@id/movieDetails" />
+    </fragment>
 
     <fragment
         android:id="@+id/search"
@@ -27,18 +34,30 @@
         android:id="@+id/favorite"
         android:name="com.dominic.movieswatch.ui.fragments.FavoriteFragment"
         android:label="Favorite"
-        tools:layout="@layout/fragment_favorite" />
+        tools:layout="@layout/fragment_favorite">
+        <action
+            android:id="@+id/action_favorite_to_movieDetails"
+            app:destination="@id/movieDetails" />
+    </fragment>
 
     <fragment
         android:id="@+id/upcomingMoviesFragment"
         android:name="com.dominic.movieswatch.ui.fragments.UpcomingMoviesFragment"
         android:label="Upcoming Movies"
-        tools:layout="@layout/fragment_upcoming_movies" />
+        tools:layout="@layout/fragment_upcoming_movies">
+        <action
+            android:id="@+id/action_upcomingMovies_to_movieDetails"
+            app:destination="@id/movieDetails" />
+    </fragment>
 
     <fragment
         android:id="@+id/popularMoviesFragment"
-        android:name="com.example.domflex.ui.Popular"
-        android:label="Popular Movies" />
+        android:name="com.dominic.movieswatch.ui.fragments.Popular"
+        android:label="Popular Movies">
+        <action
+            android:id="@+id/action_popular_to_movieDetails"
+            app:destination="@id/movieDetails" />
+    </fragment>
 
     <fragment
         android:id="@+id/movieDetails"
@@ -50,123 +69,4 @@
             app:argType="string" />
     </fragment>
 
-    <navigation
-        android:id="@+id/navigation"
-        app:startDestination="@id/homePage">
-
-        <activity
-            android:id="@+id/homePage"
-            android:name="com.dominic.movieswatch.ui.fragments.HomePage"
-            android:label="Home Page" />
-
-        <action
-            android:id="@+id/action_global_topRatedFragment"
-            app:destination="@id/topRatedFragment" />
-
-        <action
-            android:id="@+id/action_global_search"
-            app:destination="@id/search" />
-
-        <action
-            android:id="@+id/action_global_favorite"
-            app:destination="@id/favorite" />
-
-        <action
-            android:id="@+id/action_global_nowPlaying"
-            app:destination="@id/nowPlaying" />
-
-        <action
-            android:id="@+id/action_global_upcomingMoviesFragment"
-            app:destination="@id/upcomingMoviesFragment" />
-
-        <action
-            android:id="@+id/action_global_movieDetails"
-            app:destination="@id/movieDetails" />
-
-        <action
-            android:id="@+id/action_global_popularMoviesFragment"
-            app:destination="@id/popularMoviesFragment" />
-
-    </navigation>
-
 </navigation>
-
-
-
-
-    <!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<navigation xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--    xmlns:tools="http://schemas.android.com/tools"-->
-<!--    android:id="@+id/nav_graph"-->
-<!--    app:startDestination="@id/nowPlaying">-->
-
-<!--    <fragment-->
-<!--        android:id="@+id/topRatedFragment"-->
-<!--        android:name="com.dominic.movieswatch.ui.fragments.TopRatedFragment"-->
-<!--        android:label="fragment_top_rated"-->
-<!--        tools:layout="@layout/fragment_top_rated" />-->
-<!--    <fragment-->
-<!--        android:id="@+id/nowPlaying"-->
-<!--        android:name="com.dominic.movieswatch.ui.fragments.NowPlaying"-->
-<!--        android:label="fragment_now_playing"-->
-<!--        tools:layout="@layout/fragment_now_playing" />-->
-<!--    <fragment-->
-<!--        android:id="@+id/search"-->
-<!--        android:name="com.dominic.movieswatch.ui.fragments.Search"-->
-<!--        android:label="fragment_search"-->
-<!--        tools:layout="@layout/fragment_search" />-->
-<!--    <fragment-->
-<!--        android:id="@+id/favorite"-->
-<!--        android:name="com.dominic.movieswatch.ui.fragments.FavoriteFragment"-->
-<!--        android:label="fragment_favorite"-->
-<!--        tools:layout="@layout/fragment_favorite" />-->
-<!--    <fragment-->
-<!--        android:id="@+id/upcomingMoviesFragment"-->
-<!--        android:name="com.dominic.movieswatch.ui.fragments.UpcomingMoviesFragment"-->
-<!--        android:label="fragment_upcoming_movies"-->
-<!--        tools:layout="@layout/fragment_upcoming_movies" />-->
-<!--    <navigation android:id="@+id/navigation"-->
-<!--        app:startDestination="@id/homePage">-->
-<!--        <activity-->
-<!--            android:id="@+id/homePage"-->
-<!--            android:name="com.dominic.movieswatch.ui.fragments.HomePage"-->
-<!--            android:label="HomePage" />-->
-<!--        <action-->
-<!--            android:id="@+id/action_global_topRatedFragment"-->
-<!--            app:destination="@id/topRatedFragment" />-->
-<!--        <action-->
-<!--            android:id="@+id/action_global_search"-->
-<!--            app:destination="@id/search" />-->
-<!--        <action-->
-<!--            android:id="@+id/action_global_favorite"-->
-<!--            app:destination="@id/favorite" />-->
-<!--        <action-->
-<!--            android:id="@+id/action_global_nowPlaying"-->
-<!--            app:destination="@id/nowPlaying" />-->
-<!--        <action-->
-<!--            android:id="@+id/action_global_upcomingMoviesFragment"-->
-<!--            app:destination="@id/upcomingMoviesFragment" />-->
-<!--        <action-->
-<!--            android:id="@+id/action_global_movieDetails"-->
-<!--            app:destination="@id/movieDetails" />-->
-<!--        <action-->
-<!--            android:id="@+id/action_global_popularMoviesFragment"-->
-<!--            app:destination="@id/popularMoviesFragment" />-->
-<!--    </navigation>-->
-<!--    <fragment-->
-<!--        android:id="@+id/movieDetails"-->
-<!--        android:name="com.dominic.movieswatch.ui.fragments.MovieDetailsFragment"-->
-<!--        android:label="fragment_movie_details"-->
-<!--        tools:layout="@layout/fragment_now_playing">-->
-<!--        <argument-->
-<!--            android:name="title"-->
-<!--            app:argType="string" />-->
-<!--    </fragment>-->
-
-<!--    <fragment-->
-<!--        android:id="@+id/popularMoviesFragment"-->
-<!--        android:name="com.example.domflex.ui.Popular"-->
-<!--        android:label="PopularMoviesFragment" />-->
-
-<!--</navigation>-->
