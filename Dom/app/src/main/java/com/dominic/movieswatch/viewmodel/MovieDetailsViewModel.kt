@@ -3,14 +3,13 @@ package com.dominic.movieswatch.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.dominic.movieswatch.model.Movie
 import com.dominic.movieswatch.repository.MovieRepository
 import kotlinx.coroutines.launch
 
 class MovieDetailsViewModel(private val repository: MovieRepository) : ViewModel() {
-
-
     private val _movieDetails = MutableLiveData<Movie?>()
     val movie: MutableLiveData<Movie?> get() = _movieDetails
 
@@ -23,6 +22,15 @@ class MovieDetailsViewModel(private val repository: MovieRepository) : ViewModel
     }
 }
 
+class MovieDetailsViewModelFactory(private val repository: MovieRepository) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(MovieDetailsViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return MovieDetailsViewModel(repository) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
+    }
+}
 /*class MovieDetailsViewModel(private val repository: MovieRepository) : ViewModel() {
 
     private val _movieDetails = MutableLiveData<Movie>()

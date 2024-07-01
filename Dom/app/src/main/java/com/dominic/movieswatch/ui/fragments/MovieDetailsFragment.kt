@@ -9,13 +9,17 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.dominic.movieswatch.databinding.FragmentMovieDetailsBinding
+import com.dominic.movieswatch.repository.MovieRepository
 import com.dominic.movieswatch.viewmodel.MovieDetailsViewModel
+import com.dominic.movieswatch.viewmodel.MovieDetailsViewModelFactory
 
 class MovieDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentMovieDetailsBinding
-    private val viewModel: MovieDetailsViewModel by viewModels()
     private val args: MovieDetailsFragmentArgs by navArgs()
+    private val viewModel: MovieDetailsViewModel by viewModels {
+        MovieDetailsViewModelFactory(MovieRepository(apikey = String())) // Pass the repository instance
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -40,7 +40,7 @@ class UpcomingMoviesFragment : Fragment() {
             val bundle = Bundle().apply {
                 putString("movieTitle", movie.title)
             }
-            findNavController().navigate(R.id.action_global_movieDetails, bundle)
+            findNavController().navigate(R.id.action_upcomingMovies_to_movieDetails, bundle)
         }
 
         binding.upcomingRecyclerView.apply {
