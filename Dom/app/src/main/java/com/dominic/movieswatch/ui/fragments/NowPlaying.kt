@@ -2,15 +2,12 @@ package com.dominic.movieswatch.ui.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.dominic.movieswatch.R
 import com.dominic.movieswatch.adapters.MovieAdapter
 import com.dominic.movieswatch.databinding.FragmentNowPlayingBinding
 import com.dominic.movieswatch.repository.NowRepo
@@ -39,27 +36,18 @@ class NowPlaying : Fragment() {
             NowPlayingProvider(repo)
 
         }
-        nowPlayingViewModel.nowPlayingMovies.observe(viewLifecycleOwner) { popularMovies ->
-            movieAdapter= MovieAdapter(popularMovies) { movie ->
-                if (movie != null) {
-                    val bundle = Bundle().apply {
-                        putParcelable("movie", movie)
-                    }
-                    findNavController().navigate(
-                        R.id.action_homePage_to_movieDetailsFragment,
-                        bundle
-                    )
-                } else {
-                    Log.d("NowPlaying", "Movie is null")
-                }
-            }
+
+
+        nowPlayingViewModel.nowPlayingMovies.observe(
+            viewLifecycleOwner
+        ) { nowPlayingMovies ->
+            movieAdapter = MovieAdapter(nowPlayingMovies)
             binding.nowPlayingRecView.apply {
                 layoutManager = GridLayoutManager(context, 3)
                 adapter = movieAdapter
+
             }
         }
-
-
 
         return binding.root
 
