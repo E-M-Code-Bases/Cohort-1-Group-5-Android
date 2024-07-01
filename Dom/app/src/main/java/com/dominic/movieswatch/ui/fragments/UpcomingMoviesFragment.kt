@@ -2,22 +2,17 @@ package com.dominic.movieswatch.ui.fragments
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import com.dominic.movieswatch.R
 import com.dominic.movieswatch.adapters.MovieAdapter
-import com.dominic.movieswatch.databinding.FragmentNowPlayingBinding
 import com.dominic.movieswatch.databinding.FragmentUpcomingMoviesBinding
-import com.dominic.movieswatch.repository.NowRepo
 import com.dominic.movieswatch.repository.UpcomingRepo
 import com.dominic.movieswatch.utils.API_KEY
 import com.dominic.movieswatch.utils.PREF
-import com.dominic.movieswatch.viewmodel.NowPlayingProvider
-import com.dominic.movieswatch.viewmodel.NowPlayingViewModel
 import com.dominic.movieswatch.viewmodel.UpcomingMoviesProvider
 import com.dominic.movieswatch.viewmodel.UpcomingViewModel
 
@@ -46,7 +41,10 @@ class UpcomingMoviesFragment : Fragment() {
         upcomingViewModel.upcomingMovies.observe(
             viewLifecycleOwner
         ) { upcomingMovies ->
-            upAdapter = MovieAdapter(upcomingMovies)
+            upAdapter = MovieAdapter(upcomingMovies) { movie ->
+                // Handle movie click here
+            }
+
             binding.upcomingRecyclerView.apply {
                 layoutManager = GridLayoutManager(context, 3)
                 adapter =upAdapter

@@ -4,14 +4,12 @@ import TRProvider
 import TopRatedViewModel
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.gridlayout.widget.GridLayout
 import androidx.recyclerview.widget.GridLayoutManager
-import com.dominic.movieswatch.R
 import com.dominic.movieswatch.adapters.MovieAdapter
 import com.dominic.movieswatch.databinding.FragmentTopRatedBinding
 import com.dominic.movieswatch.repository.TopRatedRepository
@@ -38,9 +36,12 @@ class TopRatedFragment : Fragment() {
             viewLifecycleOwner
         ) { topRatedMovies ->
 
-            tRAdapter = MovieAdapter(topRatedMovies)
+            tRAdapter = MovieAdapter(topRatedMovies) { movie ->
+                // Handle movie click here
+            }
+
             binding.recyclerViewTR.apply {
-                layoutManager = GridLayoutManager(context, 2)
+                layoutManager = GridLayoutManager(context, 3)
                 adapter = tRAdapter
             }
 

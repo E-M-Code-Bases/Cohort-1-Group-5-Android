@@ -30,7 +30,9 @@ class FavoriteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val movieAdapter = MovieAdapter(emptyList())
+        val movieAdapter = MovieAdapter(emptyList()) { movie ->
+            navigateToDetails(movie)
+        }
 
         binding.favoriteRecyclerView.apply {
             layoutManager = GridLayoutManager(context, 2)
@@ -39,7 +41,7 @@ class FavoriteFragment : Fragment() {
 
         //favoriteViewModel.favoriteMovies.observe(viewLifecycleOwner, { movies ->
         //    movieAdapter.submitList(movies)
-       // })
+        // })
     }
 
     private fun navigateToDetails(movie: Movie) {

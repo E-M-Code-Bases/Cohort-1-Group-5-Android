@@ -4,7 +4,11 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id ("kotlin-kapt")
-  //  id ("com.google.devtools.ksp").version("1.9.10-1.0.13")apply false
+    id ("kotlin-parcelize")
+    id ("androidx.navigation.safeargs.kotlin")
+
+
+    //  id ("com.google.devtools.ksp").version("1.9.10-1.0.13")apply false
 }
 
 android {

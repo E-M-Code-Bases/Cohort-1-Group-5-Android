@@ -37,7 +37,9 @@ class Popular : Fragment() {
             PopularProvider(popRepo)
         }
         popularViewModel.popularMovies.observe(viewLifecycleOwner) { popularMovies ->
-            popAdapter = MovieAdapter(popularMovies)
+            popAdapter= MovieAdapter(popularMovies) { movie ->
+                // Handle movie click here
+            }
 
             binding.recyclerViewpopular.apply {
 
