@@ -7,12 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.dominic.movieswatch.R
 import com.dominic.movieswatch.adapters.MovieAdapter
 import com.dominic.movieswatch.databinding.FragmentUpcomingMoviesBinding
-import com.dominic.movieswatch.model.Movie
 import com.dominic.movieswatch.repository.UpcomingRepo
 import com.dominic.movieswatch.utils.API_KEY
 import com.dominic.movieswatch.utils.PREF
@@ -40,7 +37,7 @@ class UpcomingMoviesFragment : Fragment() {
             val bundle = Bundle().apply {
                 putString("movieTitle", movie.title)
             }
-            findNavController().navigate(R.id.action_upcomingMovies_to_movieDetails, bundle)
+          //  findNavController().navigate(R.id.action_upcomingMovies_to_movieDetails, bundle)
         }
 
         binding.upcomingRecyclerView.apply {
