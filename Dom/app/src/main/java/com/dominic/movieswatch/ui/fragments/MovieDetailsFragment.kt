@@ -41,6 +41,7 @@ class MovieDetailsFragment : Fragment() {
             }
         }
 
+
         return binding.root
     }
 }
