@@ -29,7 +29,7 @@ class MovieDetailsFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        val movieTitle = args.movieTitle
+        val movieTitle = args.movie.title
 
         viewModel.getMovieDetails(movieTitle).observe(viewLifecycleOwner) { movie ->
             movie?.let {

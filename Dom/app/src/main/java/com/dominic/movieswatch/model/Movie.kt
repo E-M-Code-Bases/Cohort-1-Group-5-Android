@@ -1,5 +1,6 @@
 package com.dominic.movieswatch.model
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.ColumnInfo
@@ -7,7 +8,9 @@ import java.io.Serializable
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Entity(tableName = "movies")
 data class Movie(
     @PrimaryKey val id: Int,
@@ -24,7 +27,8 @@ data class Movie(
     @ColumnInfo(name = "video") val video: Boolean,
     @ColumnInfo(name = "vote_average") val voteAverage: Double,
     @ColumnInfo(name = "vote_count") val voteCount: Int
-) : Serializable
+) : Parcelable
+
 
 class Converters {
     @TypeConverter

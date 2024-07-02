@@ -38,7 +38,7 @@ class TopRatedFragment : Fragment() {
             val bundle = Bundle().apply {
                 putString("movieTitle", movie.title)
             }
-            findNavController().navigate(R.id.action_topRated_to_movieDetails, bundle)
+          //  findNavController().navigate(R.id., bundle)
         }
         binding.recyclerViewTR.apply {
             layoutManager = GridLayoutManager(context, 3)
@@ -48,7 +48,7 @@ class TopRatedFragment : Fragment() {
             viewLifecycleOwner
         ) { topRatedMovies ->
 
-            tRAdapter.updateMovies(topRatedMovies)
+         //   tRAdapter.updateMovies(topRatedMovies)
 
 
         }
