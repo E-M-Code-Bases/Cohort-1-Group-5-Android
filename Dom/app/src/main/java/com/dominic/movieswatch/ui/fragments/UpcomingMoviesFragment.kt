@@ -46,7 +46,6 @@ class UpcomingMoviesFragment : Fragment() {
         }
 
         upcomingViewModel.upcomingMovies.observe(viewLifecycleOwner) { upcomingMovies ->
-            upAdapter.updateMovies(upcomingMovies)
         }
 
         return binding.root
