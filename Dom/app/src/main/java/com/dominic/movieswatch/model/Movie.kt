@@ -33,7 +33,6 @@ data class Movie(
     }
 }
 
-
 class Converters {
     @TypeConverter
     fun fromGenreIdsList(genreIds: List<Int>): String {
