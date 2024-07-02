@@ -27,7 +27,11 @@ data class Movie(
     @ColumnInfo(name = "video") val video: Boolean,
     @ColumnInfo(name = "vote_average") val voteAverage: Double,
     @ColumnInfo(name = "vote_count") val voteCount: Int
-) : Parcelable
+) : Parcelable {
+    override fun hashCode(): Int {
+        return id
+    }
+}
 
 
 class Converters {
