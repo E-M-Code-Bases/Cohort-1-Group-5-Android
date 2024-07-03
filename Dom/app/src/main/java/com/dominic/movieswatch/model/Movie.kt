@@ -7,6 +7,7 @@ import androidx.room.ColumnInfo
 import java.io.Serializable
 import androidx.room.TypeConverter
 import com.google.gson.Gson
+import com.google.gson.annotations.SerializedName
 import com.google.gson.reflect.TypeToken
 import kotlinx.parcelize.Parcelize
 
@@ -21,12 +22,14 @@ data class Movie(
     @ColumnInfo(name = "original_title") val originalTitle: String,
     @ColumnInfo(name = "overview") val overview: String,
     @ColumnInfo(name = "popularity") val popularity: Double,
-    @ColumnInfo(name = "poster_path") val poster_path: String,
+    @SerializedName("poster_path") val posterPath: String,
     @ColumnInfo(name = "release_date") val releaseDate: String,
     @ColumnInfo(name = "title") val title: String,
     @ColumnInfo(name = "video") val video: Boolean,
     @ColumnInfo(name = "vote_average") val voteAverage: Double,
-    @ColumnInfo(name = "vote_count") val voteCount: Int
+    @ColumnInfo(name = "vote_count") val voteCount: Int,
+    var isFavorite: Boolean = false
+
 ) : Parcelable{
     override fun hashCode(): Int {
         return id
