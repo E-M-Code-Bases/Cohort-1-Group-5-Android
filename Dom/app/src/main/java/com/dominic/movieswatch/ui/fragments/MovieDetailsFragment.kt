@@ -37,7 +37,7 @@ class MovieDetailsFragment : Fragment() {
         viewModel.getMovieDetails(movieTitle).observe(viewLifecycleOwner) { movie ->
             movie?.let {
                 binding.movie = it
-                val url = "https://image.tmdb.org/t/p/w500" + it.posterPath
+                val url = "https://image.tmdb.org/t/p/w500" + it.poster_path
                 Glide.with(this)
                     .load(url)
                     .into(binding.moviePoster)
