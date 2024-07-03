@@ -1,4 +1,4 @@
-package com.example.domflex.ui
+package com.dominic.movieswatch.ui.fragments
 
 import android.content.Context
 import android.os.Bundle

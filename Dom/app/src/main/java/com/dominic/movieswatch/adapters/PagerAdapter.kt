@@ -6,7 +6,7 @@ import com.dominic.movieswatch.ui.fragments.HomePage
 import com.dominic.movieswatch.ui.fragments.NowPlaying
 import com.dominic.movieswatch.ui.fragments.TopRatedFragment
 import com.dominic.movieswatch.ui.fragments.UpcomingMoviesFragment
-import com.example.domflex.ui.Popular
+import com.dominic.movieswatch.ui.fragments.Popular
 
 class MoviePagerAdapter(fragmentActivity: HomePage) :
     FragmentStateAdapter(fragmentActivity) {
