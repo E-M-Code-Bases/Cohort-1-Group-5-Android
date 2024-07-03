@@ -6,14 +6,6 @@ import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.dominic.movieswatch.R
 
-//@BindingAdapter("imageUrl")
-//fun setImageUrl(view: ImageView, url: String?) {
-//    if (!url.isNullOrEmpty()) {
-//        Glide.with(view.context)
-//            .load(url)
-//            .into(view)
-//    }
-//}
 @BindingAdapter("posterPath")
 fun bindImage(imageView: ImageView, posterPath: String?) {
     val fullPosterPath = posterPath?.let { "https://image.tmdb.org/t/p/w500$it" }
