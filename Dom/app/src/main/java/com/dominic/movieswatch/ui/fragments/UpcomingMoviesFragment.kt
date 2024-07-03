@@ -2,6 +2,7 @@ package com.dominic.movieswatch.ui.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.dominic.movieswatch.R
 import com.dominic.movieswatch.adapters.MovieAdapter
 import com.dominic.movieswatch.databinding.FragmentUpcomingMoviesBinding
-import com.dominic.movieswatch.model.Movie
 import com.dominic.movieswatch.repository.UpcomingRepo
 import com.dominic.movieswatch.utils.API_KEY
 import com.dominic.movieswatch.utils.PREF
@@ -40,7 +40,7 @@ class UpcomingMoviesFragment : Fragment() {
             val bundle = Bundle().apply {
                 putString("movieTitle", movie.title)
             }
-            findNavController().navigate(R.id.action_upcomingMovies_to_movieDetails, bundle)
+          //  findNavController().navigate(R.id.action_upcomingMovies_to_movieDetails, bundle)
         }
 
         binding.upcomingRecyclerView.apply {
@@ -49,9 +49,21 @@ class UpcomingMoviesFragment : Fragment() {
         }
 
         upcomingViewModel.upcomingMovies.observe(viewLifecycleOwner) { upcomingMovies ->
-            upAdapter.updateMovies(upcomingMovies)
-        }
+            upAdapter=MovieAdapter(upcomingMovies) { movie ->
+                if (movie != null) {
+                    val bundle = Bundle().apply {
+                        putParcelable("movie", movie)
+                    }
+                    findNavController().navigate(
+                        R.id.action_homePage_to_movieDetailsFragment,
+                        bundle
+                    )
+                }else {
+                    Log.d("UpcomingMovies", "Movie is null")
+                }
+            }
 
+        }
         return binding.root
     }
 

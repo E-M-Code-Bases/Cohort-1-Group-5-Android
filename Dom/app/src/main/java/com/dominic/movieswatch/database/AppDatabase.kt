@@ -1,4 +1,3 @@
-
 package com.dominic.movieswatch.database
 
 import android.content.Context
@@ -22,15 +21,15 @@ abstract class AppDatabase : RoomDatabase() {
         fun getDatabase(context: Context): AppDatabase {
 
             return INSTANCE ?: synchronized(this) {
-                if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(
-                        context.applicationContext,
-                        AppDatabase::class.java,
-                        "movie_database"
-                    ).build()
-                }
-                INSTANCE !!
-  
+
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    AppDatabase::class.java,
+                    "movie_database"
+                ).build()
+                INSTANCE = instance
+
+                instance
             }
         }
     }
