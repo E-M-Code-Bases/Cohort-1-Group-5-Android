@@ -41,17 +41,13 @@ class NowPlaying : Fragment() {
         }
         nowPlayingViewModel.nowPlayingMovies.observe(viewLifecycleOwner) { popularMovies ->
             movieAdapter = MovieAdapter(popularMovies) { movie ->
-                if (movie != null) {
-                    val bundle = Bundle().apply {
-                        putParcelable("movie", movie)
-                    }
-                    findNavController().navigate(
-                        R.id.action_homePage_to_movieDetailsFragment,
-                        bundle
-                    )
-                } else {
-                    Log.d("NowPlaying", "Movie is null")
+                val bundle = Bundle().apply {
+                    putParcelable("movie", movie)
                 }
+                findNavController().navigate(
+                    R.id.action_homePage_to_movieDetailsFragment,
+                    bundle
+                )
             }
             binding.nowPlayingRecView.apply {
                 layoutManager = GridLayoutManager(context, 3)
