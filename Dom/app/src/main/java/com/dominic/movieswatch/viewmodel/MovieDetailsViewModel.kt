@@ -1,27 +1,39 @@
 package com.dominic.movieswatch.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.dominic.movieswatch.model.Movie
 import com.dominic.movieswatch.repository.MovieRepository
+import com.dominic.movieswatch.utils.API_KEY
+import com.dominic.movieswatch.utils.account_id
 import kotlinx.coroutines.launch
 
 class MovieDetailsViewModel(private val repository: MovieRepository) : ViewModel() {
     private val _movieDetails = MutableLiveData<Movie?>()
     val movie: MutableLiveData<Movie?> get() = _movieDetails
 
+    private val _isFavorite = MutableLiveData<Boolean>()
+    val isFavorite: LiveData<Boolean> get() = _isFavorite
+
     fun getMovieDetails(title: String): MutableLiveData<Movie?> {
         viewModelScope.launch {
             val movie = repository.getMovieByTitle(title)
             _movieDetails.postValue(movie)
+            _isFavorite.postValue(repository.isFavorite(account_id, API_KEY, movie?.id ?: -1))
         }
         return movie
     }
-}
 
+    fun toggleFavoriteStatus(movie: Movie) {
+        viewModelScope.launch {
+            if (_isFavorite.value == true) {
+                repository.removeFavorite(account_id, API_KEY, movie.id)
+            } else {
+                repository.addFavorite(account_id, API_KEY, movie)
+            }
+            _isFavorite.postValue(!_isFavorite.value!!)
+        }
+    }
+}
 class MovieDetailsViewModelFactory(private val repository: MovieRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MovieDetailsViewModel::class.java)) {
@@ -31,40 +43,3 @@ class MovieDetailsViewModelFactory(private val repository: MovieRepository) : Vi
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
-/*class MovieDetailsViewModel(private val repository: MovieRepository) : ViewModel() {
-
-    private val _movieDetails = MutableLiveData<Movie>()
-    val movieDetails: LiveData<Movie> get() = _movieDetails
-
-    private val _isFavorite = MutableLiveData<Boolean>()
-    val isFavorite: LiveData<Boolean> get() = _isFavorite
-
-    fun loadMovieDetails(movieId: Int) {
-        viewModelScope.launch {
-            val movieDetails = repository.getMovieDetails(movieId)
-            _movieDetails.value = movieDetails
-            _isFavorite.value = repository.isFavorite(movieId)
-        }
-    }
-
-    fun toggleFavorite() {
-        _movieDetails.value?.let { movie ->
-            viewModelScope.launch {
-                val newStatus = repository.toggleFavorite(movie.id)
-                _isFavorite.value = newStatus
-            }
-        }
-    }
-
-//    fun loadTrailer(movieId: Int) {
-//        viewModelScope.launch {
-//            val trailer = repository.getMovieTrailer(movieId)
-//            // Assuming you have a method to play the trailer
-//            playTrailer(trailer.url)
-//        }
-//    }
-
-    private fun playTrailer(url: String) {
-        // Logic to play the trailer
-    }
-}*/
