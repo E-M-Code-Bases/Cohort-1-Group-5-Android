@@ -36,7 +36,7 @@
                     android:layout_height="200dp"
                     android:layout_marginBottom="16dp"
                     android:contentDescription="@string/movie_poster"
-                    app:posterPath="@{movie.posterPath}"
+                    app:posterPath="@{movie.poster_path}"
                     app:layout_constraintBottom_toTopOf="@+id/titleLinearLayout"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
