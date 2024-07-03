@@ -36,17 +36,14 @@ class UpcomingMoviesFragment : Fragment() {
             UpcomingMoviesProvider(repository)
         }
 
-        upAdapter = MovieAdapter(emptyList()) { movie ->
-            val bundle = Bundle().apply {
-                putString("movieTitle", movie.title)
-            }
-          //  findNavController().navigate(R.id.action_upcomingMovies_to_movieDetails, bundle)
-        }
+//        upAdapter = MovieAdapter(emptyList()) { movie ->
+//            val bundle = Bundle().apply {
+//                putParcelable("movieTitle", movie)
+//            }
+//            findNavController().navigate(R.id.action_homePage_to_movieDetailsFragment, bundle)
+//        }
 
-        binding.upcomingRecyclerView.apply {
-            layoutManager = GridLayoutManager(context, 3)
-            adapter = upAdapter
-        }
+
 
         upcomingViewModel.upcomingMovies.observe(viewLifecycleOwner) { upcomingMovies ->
             upAdapter=MovieAdapter(upcomingMovies) { movie ->
@@ -62,7 +59,10 @@ class UpcomingMoviesFragment : Fragment() {
                     Log.d("UpcomingMovies", "Movie is null")
                 }
             }
-
+            binding.upcomingRecyclerView.apply {
+                layoutManager = GridLayoutManager(context, 3)
+                adapter = upAdapter
+            }
         }
         return binding.root
     }
