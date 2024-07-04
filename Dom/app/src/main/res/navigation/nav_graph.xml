@@ -39,10 +39,16 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
-
             android:id="@+id/action_homePage_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment" />
+        <action
+            android:id="@+id/action_homePage_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.dominic.movieswatch.ui.fragments.FavoriteFragment"
+        tools:layout="@layout/fragment_favorite" />
     <activity
         android:id="@+id/mainActivity"
         android:name="com.dominic.movieswatch.utils.MainActivity"
