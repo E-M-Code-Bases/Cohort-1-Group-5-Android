@@ -1,24 +1,51 @@
 package com.dominic.movieswatch.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import android.util.Log
+import androidx.lifecycle.*
 import com.dominic.movieswatch.model.Movie
 import com.dominic.movieswatch.repository.MovieRepository
+import com.dominic.movieswatch.utils.API_KEY
+import com.dominic.movieswatch.utils.account_id
 import kotlinx.coroutines.launch
 
 class MovieDetailsViewModel(private val repository: MovieRepository) : ViewModel() {
-    private val _movieDetails = MutableLiveData<Movie?>()
-    val movie: MutableLiveData<Movie?> get() = _movieDetails
 
-    fun getMovieDetails(title: String): MutableLiveData<Movie?> {
+    private val _movieDetails = MutableLiveData<Movie?>()
+    val movie: LiveData<Movie?> get() = _movieDetails
+
+    private val _isFavorite = MutableLiveData<Boolean>()
+    val isFavorite: LiveData<Boolean> get() = _isFavorite
+
+    fun getMovieDetails(title: String): LiveData<Movie?> {
         viewModelScope.launch {
-            val movie = repository.getMovieByTitle(title)
-            _movieDetails.postValue(movie)
+            try {
+                val movie = repository.getMovieByTitle(title)
+                _movieDetails.postValue(movie)
+                movie?.let {
+                    _isFavorite.value = repository.isFavorite(account_id, "Bearer $API_KEY", it.id)
+                }
+            } catch (e: Exception) {
+                Log.e("MovieDetailsViewModel", "Error fetching movie details: ${e.message}")
+            }
         }
         return movie
+    }
+
+    fun toggleFavorite(movie: Movie) {
+        viewModelScope.launch {
+            try {
+                val isFavorite = _isFavorite.value ?: false
+                if (isFavorite) {
+                    repository.removeFavorite(account_id, "Bearer $API_KEY", movie.id)
+                } else {
+                    repository.addFavorite(account_id, "Bearer $API_KEY", movie)
+                }
+                _isFavorite.value = !isFavorite
+                Log.d("MovieDetailsViewModel", "Favorite status toggled: ${!isFavorite}")
+            } catch (e: Exception) {
+                Log.e("MovieDetailsViewModel", "Error toggling favorite status: ${e.message}")
+            }
+        }
     }
 }
 
@@ -31,40 +58,3 @@ class MovieDetailsViewModelFactory(private val repository: MovieRepository) : Vi
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
-/*class MovieDetailsViewModel(private val repository: MovieRepository) : ViewModel() {
-
-    private val _movieDetails = MutableLiveData<Movie>()
-    val movieDetails: LiveData<Movie> get() = _movieDetails
-
-    private val _isFavorite = MutableLiveData<Boolean>()
-    val isFavorite: LiveData<Boolean> get() = _isFavorite
-
-    fun loadMovieDetails(movieId: Int) {
-        viewModelScope.launch {
-            val movieDetails = repository.getMovieDetails(movieId)
-            _movieDetails.value = movieDetails
-            _isFavorite.value = repository.isFavorite(movieId)
-        }
-    }
-
-    fun toggleFavorite() {
-        _movieDetails.value?.let { movie ->
-            viewModelScope.launch {
-                val newStatus = repository.toggleFavorite(movie.id)
-                _isFavorite.value = newStatus
-            }
-        }
-    }
-
-//    fun loadTrailer(movieId: Int) {
-//        viewModelScope.launch {
-//            val trailer = repository.getMovieTrailer(movieId)
-//            // Assuming you have a method to play the trailer
-//            playTrailer(trailer.url)
-//        }
-//    }
-
-    private fun playTrailer(url: String) {
-        // Logic to play the trailer
-    }
-}*/
