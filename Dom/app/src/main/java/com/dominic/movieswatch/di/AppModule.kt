@@ -51,7 +51,7 @@ class TokenInterceptor(private val api_key: String): Interceptor {
       }
 
       val repositoryModule: Module = module {
-          single { MovieRepository(get(), get()) }
+          single { MovieDetailsRepo(get(), get()) }
       }
 
       val viewModelModule: Module = module {

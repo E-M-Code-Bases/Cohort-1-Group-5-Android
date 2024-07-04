@@ -3,12 +3,12 @@ package com.dominic.movieswatch.viewmodel
 import android.util.Log
 import androidx.lifecycle.*
 import com.dominic.movieswatch.model.Movie
-import com.dominic.movieswatch.repository.MovieRepository
+import com.dominic.movieswatch.repository.MovieDetailsRepo
 import com.dominic.movieswatch.utils.API_KEY
 import com.dominic.movieswatch.utils.account_id
 import kotlinx.coroutines.launch
 
-class MovieDetailsViewModel(private val repository: MovieRepository) : ViewModel() {
+class MovieDetailsViewModel(private val repository: MovieDetailsRepo) : ViewModel() {
 
     private val _movieDetails = MutableLiveData<Movie?>()
     val movie: LiveData<Movie?> get() = _movieDetails
@@ -49,7 +49,7 @@ class MovieDetailsViewModel(private val repository: MovieRepository) : ViewModel
     }
 }
 
-class MovieDetailsViewModelFactory(private val repository: MovieRepository) : ViewModelProvider.Factory {
+class MovieDetailsViewModelFactory(private val repository: MovieDetailsRepo) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MovieDetailsViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
