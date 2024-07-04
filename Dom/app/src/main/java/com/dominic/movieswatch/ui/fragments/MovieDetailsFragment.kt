@@ -12,7 +12,6 @@ import com.dominic.movieswatch.R
 import com.dominic.movieswatch.databinding.FragmentMovieDetailsBinding
 import com.dominic.movieswatch.repository.MovieRepository
 import com.dominic.movieswatch.utils.API_KEY
-import com.dominic.movieswatch.utils.account_id
 import com.dominic.movieswatch.viewmodel.MovieDetailsViewModel
 import com.dominic.movieswatch.viewmodel.MovieDetailsViewModelFactory
 
@@ -37,7 +36,7 @@ class MovieDetailsFragment : Fragment() {
         viewModel.getMovieDetails(movieTitle).observe(viewLifecycleOwner) { movie ->
             movie?.let {
                 binding.movie = it
-                val url = "https://image.tmdb.org/t/p/w500" + it.poster_path
+                val url = "https://image.tmdb.org/t/p/w500" + it.posterPath
                 Glide.with(this)
                     .load(url)
                     .into(binding.moviePoster)

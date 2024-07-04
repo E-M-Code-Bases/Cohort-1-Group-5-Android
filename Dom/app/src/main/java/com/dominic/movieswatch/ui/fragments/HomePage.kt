@@ -8,6 +8,7 @@ import android.widget.ImageView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.dominic.movieswatch.R
 import com.dominic.movieswatch.adapters.MoviePagerAdapter
@@ -40,6 +41,9 @@ class HomePage : Fragment() {
                 }
 
                 R.id.navigation_my_library -> {
+                    findNavController().navigate(R.id.action_homePage_to_favoritesFragment)
+
+
                     true
                 }
 
