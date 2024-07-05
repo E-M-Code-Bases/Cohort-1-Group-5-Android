@@ -37,9 +37,9 @@ interface ApiService {
     suspend fun getFavoriteMovies(
         @Path("account_id") accountId: String,
         @Header("Authorization") authHeader: String,
-        @Query("language") language: String = "en-US",
-        @Query("sort_by") sortBy: String = "created_at.asc",
-        @Query("page") page: Int = 1
+//        @Query("language") language: String = "en-US",
+//        @Query("sort_by") sortBy: String = "created_at.asc",
+//        @Query("page") page: Int = 1
     ): Response<MoviesResponse>
 
     @GET("account/{account_id}/favorite/movies")
