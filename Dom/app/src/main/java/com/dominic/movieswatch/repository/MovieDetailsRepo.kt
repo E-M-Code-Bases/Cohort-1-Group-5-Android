@@ -6,7 +6,7 @@ import com.dominic.movieswatch.model.Movie
 import com.dominic.movieswatch.model.FavoriteRequest
 import retrofit2.HttpException
 
-class MovieRepository(private val apikey: String) {
+class MovieDetailsRepo(private val apikey: String) {
     private val apiService: ApiService = AppModule().getRetrofitInstance(apikey)
 
     suspend fun getMovieByTitle(title: String): Movie? {

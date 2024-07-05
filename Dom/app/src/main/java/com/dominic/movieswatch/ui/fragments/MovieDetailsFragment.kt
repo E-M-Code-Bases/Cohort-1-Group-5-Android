@@ -10,7 +10,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.dominic.movieswatch.R
 import com.dominic.movieswatch.databinding.FragmentMovieDetailsBinding
-import com.dominic.movieswatch.repository.MovieRepository
+import com.dominic.movieswatch.repository.MovieDetailsRepo
 import com.dominic.movieswatch.utils.API_KEY
 import com.dominic.movieswatch.viewmodel.MovieDetailsViewModel
 import com.dominic.movieswatch.viewmodel.MovieDetailsViewModelFactory
@@ -20,7 +20,7 @@ class MovieDetailsFragment : Fragment() {
     private lateinit var binding: FragmentMovieDetailsBinding
     private val args: MovieDetailsFragmentArgs by navArgs()
     private val viewModel: MovieDetailsViewModel by viewModels {
-        MovieDetailsViewModelFactory(MovieRepository(API_KEY))
+        MovieDetailsViewModelFactory(MovieDetailsRepo(API_KEY))
     }
 
     override fun onCreateView(

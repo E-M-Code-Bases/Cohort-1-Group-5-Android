@@ -1,14 +1,9 @@
 package com.dominic.movieswatch.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.dominic.movieswatch.model.Movie
-import com.dominic.movieswatch.repository.MovieRepository
-import kotlinx.coroutines.launch
+import com.dominic.movieswatch.repository.MovieDetailsRepo
 
-class SearchViewModel(private val repository: MovieRepository) : ViewModel() {
+class SearchViewModel(private val repository: MovieDetailsRepo) : ViewModel() {
 
     /*private val _searchResults = MutableLiveData<List<Movie>>()
     val searchResults: LiveData<List<Movie>> get() = _searchResults
