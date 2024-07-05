@@ -1,3 +1,4 @@
+
 package com.dominic.movieswatch.ui.fragments
 
 import android.content.Context
@@ -65,3 +66,4 @@ class Popular : Fragment() {
         binding.recyclerViewpopular.adapter = null
     }
 }
+
