@@ -1,4 +1,4 @@
-package com.dominic.movieswatch.model
+package com.dominic.movieswatch.ui.fragments
 
 import androidx.fragment.app.viewModels
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.dominic.movieswatch.R
+import com.dominic.movieswatch.viewmodel.VideoViewModel
 
 class VideoFragment : Fragment() {
 

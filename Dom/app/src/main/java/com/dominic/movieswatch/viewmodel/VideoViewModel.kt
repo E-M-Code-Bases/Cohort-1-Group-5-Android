@@ -1,4 +1,4 @@
-package com.dominic.movieswatch.model
+package com.dominic.movieswatch.viewmodel
 
 import androidx.lifecycle.ViewModel
 

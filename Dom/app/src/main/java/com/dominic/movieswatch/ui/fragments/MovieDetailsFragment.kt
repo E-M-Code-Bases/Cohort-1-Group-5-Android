@@ -40,6 +40,7 @@ class MovieDetailsFragment : Fragment() {
                 Glide.with(this)
                     .load(url)
                     .into(binding.moviePoster)
+                //cl.. ls here
             }
         }
 
