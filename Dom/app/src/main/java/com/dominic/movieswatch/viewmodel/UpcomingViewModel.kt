@@ -14,6 +14,7 @@ import kotlinx.coroutines.launch
 
 class UpcomingViewModel(val repository: UpcomingRepo):ViewModel (){
      var upcomingMovies = MutableLiveData<List<Movie>>(emptyList())
+    var errorMessage = MutableLiveData<String>()
 
 
     init {
@@ -28,15 +29,15 @@ class UpcomingViewModel(val repository: UpcomingRepo):ViewModel (){
                        if (response.body()!!.results.isNotEmpty()) {
                            upcomingMovies.postValue(response.body()?.results)
                        } else {
-                           Log.d("", "no new  movies found")
+                           errorMessage.postValue("No new movies found")
                        }
                    } else {
-                       Log.d("", "Error fetching Now Playing movies: ${response.code()}")
+                       errorMessage.postValue("Error fetching Now Playing movies: ${response.code()}")
                    }
 
 
                } catch (e: Exception) {
-                   Log.e("", "Error fetching nowPlaying movies", e)
+                   errorMessage.postValue("Error fetching upcoming movies: ${e.message}")
                }
                delay(10000L)
            }
