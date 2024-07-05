@@ -35,12 +35,15 @@
                     android:layout_width="150dp"
                     android:layout_height="200dp"
                     android:layout_marginBottom="16dp"
+                    android:layout_marginTop="24dp"
                     android:contentDescription="@string/movie_poster"
+                    app:posterPath="@{movie.posterPath}"
                     app:layout_constraintBottom_toTopOf="@+id/titleLinearLayout"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:srcCompat="@drawable/ic_placeholder_image" />
+
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/titleLinearLayout"
@@ -74,7 +77,8 @@
                         android:layout_marginEnd="30dp"
                         android:contentDescription="@string/favorite_icon"
                         android:padding="8dp"
-                        android:src="@drawable/ic_favorite"
+                        app:favoriteIcon="@{viewModel.isFavorite}"
+                        android:onClick="@{() -> viewModel.toggleFavorite(movie)}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>

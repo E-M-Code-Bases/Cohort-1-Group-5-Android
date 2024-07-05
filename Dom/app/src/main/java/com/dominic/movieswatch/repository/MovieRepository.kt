@@ -1,44 +1,41 @@
 package com.dominic.movieswatch.repository
 
+import com.dominic.movieswatch.api.ApiService
 import com.dominic.movieswatch.di.AppModule
 import com.dominic.movieswatch.model.Movie
+import com.dominic.movieswatch.model.FavoriteRequest
+import retrofit2.HttpException
 
-class MovieRepository(private val apikey: String ) {
-    private val appModule = AppModule().getRetrofitInstance(apikey)
+class MovieRepository(private val apikey: String) {
+    private val apiService: ApiService = AppModule().getRetrofitInstance(apikey)
+
     suspend fun getMovieByTitle(title: String): Movie? {
-        val response = appModule.getMovieByTitle(title)
+        val response = apiService.getMovieByTitle(title)
         return if (response.isSuccessful) {
             response.body()?.results?.firstOrNull { it.title == title }
         } else {
             null
         }
     }
-}
 
-
-/*class MovieRepository(private val apiService: ApiService,private val movieDao: MovieDao) {
-
-    //suspend fun getUpcoming(apiKey: String) = apiService.getNowPlaying(apiKey,1)
-    suspend fun addFavoriteMovie(movie: Movie) = movieDao.addFavoriteMovie(movie)
-    fun getFavoriteMovies() = movieDao.getFavoriteMovies()
-    suspend fun removeFavoriteMovie(movie: Movie) = movieDao.removeFavoriteMovie(movie)
-
-
-
-    suspend fun getPopularMovies(apiKey: String): Response<List<MoviesResponse>> {
-        return apiService.getPopularMovies(apiKey, 1)
+    suspend fun isFavorite(accountId: String, authHeader: String, movieId: Int): Boolean {
+        val response = apiService.getFavoriteMovies(accountId, authHeader)
+        if (response.isSuccessful) {
+            val favoriteMovies = response.body()?.results ?: emptyList()
+            return favoriteMovies.any { it.id == movieId }
+        }
+        return false
     }
 
-    suspend fun getTopRatedMovies(apiKey: String): Response<List<MoviesResponse>> {
-        return apiService.getTopRatedMovies(apiKey, 1)
+    suspend fun addFavorite(accountId: String, authHeader: String, movie: Movie) {
+        val request = FavoriteRequest(mediaType = "movie", mediaId = movie.id, favorite = true)
+        val response = apiService.markAsFavorite(accountId, authHeader, request)
+        if (!response.isSuccessful) throw HttpException(response)
     }
 
-    suspend fun getUpcomingMovies(apiKey: String): Response<List<MoviesResponse>> {
-        return apiService.getUpcomingMovies(apiKey, 1)
-    }
-
-    suspend fun getTrailers(apiKey: String): Response<List<MoviesResponse>> {
-        return apiService.getTrailers(apiKey, 1)
+    suspend fun removeFavorite(accountId: String, authHeader: String, movieId: Int) {
+        val request = FavoriteRequest(mediaType = "movie", mediaId = movieId, favorite = false)
+        val response = apiService.markAsFavorite(accountId, authHeader, request)
+        if (!response.isSuccessful) throw HttpException(response)
     }
 }
-*/
