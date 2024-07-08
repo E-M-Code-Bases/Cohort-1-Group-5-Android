@@ -1,45 +1,63 @@
 package com.dominic.movieswatch.ui.fragments
 
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
+import com.dominic.movieswatch.R
+import com.dominic.movieswatch.databinding.FragmentMovieDetailsBinding
+import com.dominic.movieswatch.repository.MovieDetailsRepo
+import com.dominic.movieswatch.utils.API_KEY
+import com.dominic.movieswatch.viewmodel.MovieDetailsViewModel
+import com.dominic.movieswatch.viewmodel.MovieDetailsViewModelFactory
 
 class MovieDetailsFragment : Fragment() {
 
-    /*  private lateinit var binding: FragmentMovieDetailsBinding
-    private val viewModel: MovieDetailsViewModel by viewModels()
+    private lateinit var binding: FragmentMovieDetailsBinding
+    private val args: MovieDetailsFragmentArgs by navArgs()
+    private val viewModel: MovieDetailsViewModel by viewModels {
+        MovieDetailsViewModelFactory(MovieDetailsRepo(API_KEY))
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie_details, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    ): View? {
+        binding = FragmentMovieDetailsBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        viewModel.loadMovieDetails(movieId)
+        val movieTitle = args.movie.title
 
-        viewModel.movieDetails.observe(viewLifecycleOwner, Observer { movie ->
-            binding.movie = movie
-        })
+        viewModel.getMovieDetails(movieTitle).observe(viewLifecycleOwner) { movie ->
+            movie?.let {
+                binding.movie = it
+                val url = "https://image.tmdb.org/t/p/w500" + it.posterPath
+                Glide.with(this)
+                    .load(url)
+                    .into(binding.moviePoster)
+                //cl.. ls here
+            }
+        }
 
-        viewModel.isFavorite.observe(viewLifecycleOwner, Observer { isFavorite ->
-            updateFavoriteIcon(isFavorite)
-        })
+        viewModel.isFavorite.observe(viewLifecycleOwner) { isFavorite ->
+            val favoriteIconRes = if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
+            binding.favoriteIcon.setImageResource(favoriteIconRes)
+        }
 
         binding.favoriteIcon.setOnClickListener {
-            viewModel.toggleFavorite()
+            val movie = binding.movie
+            if (movie != null) {
+//                viewModel.toggleFavorite(account_id, "Bearer $API_KEY", movie)
+                viewModel.toggleFavorite(movie)
+
+            }
         }
+        return binding.root
     }
-
-    private fun updateFavoriteIcon(isFavorite: Boolean) {
-        val iconRes = if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
-        binding.favoriteIcon.setImageResource(iconRes)
-    }
-}*/
-
 }
+

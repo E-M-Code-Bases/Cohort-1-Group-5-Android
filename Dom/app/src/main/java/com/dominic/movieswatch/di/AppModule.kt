@@ -46,24 +46,24 @@ class TokenInterceptor(private val api_key: String): Interceptor {
     }
 
 
-  /*  val networkModule: Module = module {
-        single { (api_key: String) -> AppModule().getRetrofitInstance(api_key) }
-    }
+    /*  val networkModule: Module = module {
+          single { (api_key: String) -> AppModule().getRetrofitInstance(api_key) }
+      }
 
-    val repositoryModule: Module = module {
-        single { MovieRepository(get(), get()) }
-    }
+      val repositoryModule: Module = module {
+          single { MovieDetailsRepo(get(), get()) }
+      }
 
-    val viewModelModule: Module = module {
-        viewModel { MovieViewModel(get()) }
-        viewModel { SearchViewModel(get()) }
-        viewModel { FavoriteViewModel(get()) }
-    }
-    val databaseModules: Module = module {
-        single { AppDatabase.getDatabase(get()) }
-        single { get<AppDatabase>().movieDao() }
-    }
+      val viewModelModule: Module = module {
+          viewModel { MovieViewModel(get()) }
+          viewModel { SearchViewModel(get()) }
+          viewModel { FavoriteViewModel(get()) }
+      }
+      val databaseModules: Module = module {
+          single { AppDatabase.getDatabase(get()) }
+          single { get<AppDatabase>().movieDao() }
+      }
 
-    val appModules = listOf(networkModule, repositoryModule, viewModelModule, databaseModules)
- */
+      val appModules = listOf(networkModule, repositoryModule, viewModelModule, databaseModules)
+   */
 }

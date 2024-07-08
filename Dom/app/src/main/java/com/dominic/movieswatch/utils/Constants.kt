@@ -1,6 +1,8 @@
 package com.dominic.movieswatch.utils
 
 const val PREF = "my_pref"
-const val API_KEY = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5N2U0MTM5Njc4ODc0OTM5ZGRlOWUzZGE3MzhkODJmMSIsInN1YiI6IjY2Njk2MzQ1ODI4MzhlMDBmNWZkMThjNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.OrFk60j76-bdNEDLaoZPUQFlh_rwqIXVZ3EOQQ_XduY"
+const val API_KEY = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlYWVmZDRlZmVkYjFlOTU2ZTMwMDE0ZDM0Y2U1MThlMyIsIm5iZiI6MTcxOTkyMjc0Mi41NDcwNTgsInN1YiI6IjY2NzEzZjU4OTYyYjg5MDdlOTBkZjQ5ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.HTDnq4slEbwb5YO1DMnPHb62-GjQW1brjiqmY-KXX7U"
+const val account_id = "21334157"
 val baseUrl = "https://api.themoviedb.org/3/"
+
 

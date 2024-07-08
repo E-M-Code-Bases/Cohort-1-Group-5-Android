@@ -1,15 +1,13 @@
 package com.dominic.movieswatch.ui.fragments
 
-import TRProvider
-import TopRatedViewModel
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.gridlayout.widget.GridLayout
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dominic.movieswatch.R
 import com.dominic.movieswatch.adapters.MovieAdapter
@@ -18,6 +16,8 @@ import com.dominic.movieswatch.repository.TopRatedRepository
 import com.dominic.movieswatch.utils.API_KEY
 import com.dominic.movieswatch.utils.PREF
 
+import TRProvider
+import TopRatedViewModel
 
 class TopRatedFragment : Fragment() {
     private lateinit var binding: FragmentTopRatedBinding
@@ -34,18 +34,29 @@ class TopRatedFragment : Fragment() {
         val topRatedViewModel: TopRatedViewModel by viewModels {
             TRProvider(repository)
         }
-        topRatedViewModel.topRatedMovies.observe(
-            viewLifecycleOwner
-        ) { topRatedMovies ->
 
-            tRAdapter = MovieAdapter(topRatedMovies)
+        topRatedViewModel.topRatedMovies.observe(viewLifecycleOwner) { topRatedMovies ->
+            tRAdapter = MovieAdapter(topRatedMovies) { movie ->
+                val bundle = Bundle().apply {
+                    putParcelable("movie", movie)
+                }
+                findNavController().navigate(
+                    R.id.action_homePage_to_movieDetailsFragment,
+                    bundle
+                )
+            }
+
             binding.recyclerViewTR.apply {
                 layoutManager = GridLayoutManager(context, 3)
                 adapter = tRAdapter
             }
-
         }
 
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.recyclerViewTR.adapter = null
     }
 }

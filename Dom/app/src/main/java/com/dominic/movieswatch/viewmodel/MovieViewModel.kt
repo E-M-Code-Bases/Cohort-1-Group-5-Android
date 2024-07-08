@@ -5,10 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dominic.movieswatch.model.MoviesResponse
-import com.dominic.movieswatch.repository.MovieRepository
+import com.dominic.movieswatch.repository.MovieDetailsRepo
 import kotlinx.coroutines.launch
 
-class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
+class MovieViewModel(private val repository: MovieDetailsRepo) : ViewModel() {
 
     val popularMovies = MutableLiveData<List<MoviesResponse>>()
     val topRatedMovies=MutableLiveData<List<MoviesResponse>>()

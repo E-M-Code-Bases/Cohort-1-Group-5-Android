@@ -1,18 +1,13 @@
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.dominic.movieswatch.model.Movie
-import com.dominic.movieswatch.model.MoviesResponse
-import com.dominic.movieswatch.repository.MovieRepository
 import com.dominic.movieswatch.repository.TopRatedRepository
-import com.dominic.movieswatch.ui.fragments.TopRatedFragment
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
-import kotlin.math.log
 
 class TopRatedViewModel(private val repository: TopRatedRepository) : ViewModel() {
 
@@ -41,7 +36,7 @@ class TopRatedViewModel(private val repository: TopRatedRepository) : ViewModel(
                 } catch (e: Exception) {
                     Log.e("", "Error fetching TopRatedMovies", e)
                 }
-                delay(1000L)
+                delay(10000L)
             }
 
         }

@@ -1,12 +1,14 @@
-package com.example.domflex.ui
+package com.dominic.movieswatch.ui.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dominic.movieswatch.R
 import com.dominic.movieswatch.adapters.MovieAdapter
@@ -37,7 +39,15 @@ class Popular : Fragment() {
             PopularProvider(popRepo)
         }
         popularViewModel.popularMovies.observe(viewLifecycleOwner) { popularMovies ->
-            popAdapter = MovieAdapter(popularMovies)
+            popAdapter= MovieAdapter(popularMovies) { movie ->
+                val bundle = Bundle().apply {
+                    putParcelable("movie", movie)
+                }
+                findNavController().navigate(
+                    R.id.action_homePage_to_movieDetailsFragment,
+                    bundle
+                )
+            }
 
             binding.recyclerViewpopular.apply {
 

@@ -1,10 +1,8 @@
 package com.dominic.movieswatch.adapters
 
-import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dominic.movieswatch.R
@@ -12,7 +10,8 @@ import com.dominic.movieswatch.databinding.MovieItemsBinding
 import com.dominic.movieswatch.model.Movie
 
 private const val TAG = "adapter"
-class MovieAdapter(private var movies: List<Movie>) :
+
+class MovieAdapter(var movies: List<Movie>, private val onMovieClick: (Movie) -> Unit) :
 
     RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
@@ -22,21 +21,16 @@ class MovieAdapter(private var movies: List<Movie>) :
 
         //fetchmovies
         fun bind(movie: Movie) {
-            val url = "https://image.tmdb.org/t/p/w500"+movie.poster_path
+            val url = "https://image.tmdb.org/t/p/w500" + movie.posterPath
             Log.d(TAG, "poster -> $url")
-            Glide.with(binding.moviePoster.context)
-                .load(url)
-                .placeholder(R.drawable.baseline_image_search_24)
-                .into(binding.moviePoster)
+            Glide.with(binding.moviePoster.context).load(url)
+                .placeholder(R.drawable.baseline_image_search_24).into(binding.moviePoster)
             binding.title.text = movie.title
             binding.root.setOnClickListener {
 
-                val bundle = Bundle().apply {
-                    putString("movie", movie.title)
-                }
+                onMovieClick(movie)
 
-                it.findNavController()
-                    .navigate(R.id.action_global_movieDetails, bundle)
+
             }
 
         }
