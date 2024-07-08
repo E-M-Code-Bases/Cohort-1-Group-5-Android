@@ -40,7 +40,7 @@ class TopRatedFragment : Fragment() {
 
             tRAdapter = MovieAdapter(topRatedMovies)
             binding.recyclerViewTR.apply {
-                layoutManager = GridLayoutManager(context, 2)
+                layoutManager = GridLayoutManager(context, 3)
                 adapter = tRAdapter
             }
 
