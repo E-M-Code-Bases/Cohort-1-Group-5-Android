@@ -11,7 +11,5 @@ class NowRepo(private val apikey: String ) {
         return appModule.getNowPlaying()
     }
 
-  /*  suspend fun getMovieTrailers(movieId: Int): Response<MoviesResponse> {
-        return appModule.getTrailer(movieId)
-    }*/
+
 }
