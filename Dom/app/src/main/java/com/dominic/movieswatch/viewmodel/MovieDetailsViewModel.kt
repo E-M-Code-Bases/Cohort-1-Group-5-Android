@@ -30,12 +30,24 @@ class MovieDetailsViewModel(private val repository: MovieDetailsRepo) : ViewMode
                 _movieDetails.postValue(movie)
                 movie?.let {
                     _isFavorite.value = repository.isFavorite(account_id, "Bearer $API_KEY", it.id)
+                    getTrailer(it.id)
                 }
             } catch (e: Exception) {
                 Log.e("MovieDetailsViewModel", "Error fetching movie details: ${e.message}")
             }
         }
         return movie
+    }
+
+    fun getTrailer(movieId: Int) {
+        viewModelScope.launch {
+            try {
+                val trailers = repository.getTrailers(movieId, "Bearer $API_KEY")
+                _trailers.postValue(trailers)
+            } catch (e: Exception) {
+                Log.e("MovieDetailsViewModel", "Error fetching trailers: ${e.message}")
+            }
+        }
     }
 
     fun toggleFavorite(movie: Movie) {
@@ -56,8 +68,7 @@ class MovieDetailsViewModel(private val repository: MovieDetailsRepo) : ViewMode
     }
 
     fun setTrailerVisible(visible: Boolean) {
-        _isTrailerVisible.value= visible
-
+        _isTrailerVisible.value = visible
     }
 }
 

@@ -13,4 +13,5 @@ class FavoritesRepository (private val apiKey : String){
     suspend fun getFavoriteMovies(accountId: String, authHeader: String): Response<MoviesResponse> {
         return apiService.getFavoriteMovies(accountId, authHeader)
     }
+
 }
