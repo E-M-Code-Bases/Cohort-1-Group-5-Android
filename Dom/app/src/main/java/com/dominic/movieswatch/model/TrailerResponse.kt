@@ -1,5 +1,7 @@
 package com.dominic.movieswatch.model
 
 data class TrailerResponse(
-    val results: List<Trailer>
+    val id: Int,
+    val results: List<TrailerResult>
+
 )

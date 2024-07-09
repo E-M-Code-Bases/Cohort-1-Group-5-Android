@@ -1,6 +1,7 @@
 package com.dominic.movieswatch.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -14,10 +15,15 @@ import kotlinx.coroutines.launch
 
 class NowPlayingViewModel(private val repo: NowRepo) : ViewModel() {
     var nowPlayingMovies = MutableLiveData<List<Movie>>(emptyList())
+        private val _trailerId = MutableLiveData<String?>()
+    val trailerId: LiveData<String?> get() = _trailerId
+
 
     init {
         fetchNowPlayingMovies()
     }
+
+
 
     private fun fetchNowPlayingMovies() {
         viewModelScope.launch {
@@ -43,6 +49,17 @@ class NowPlayingViewModel(private val repo: NowRepo) : ViewModel() {
 
 
     }
+  /*  fun fetchTrailerId(movieId: Int) {
+        viewModelScope.launch {
+            try {
+                val trailerId = repo.getMovieTrailers(movieId)
+                _trailerId.postValue(trailerId)
+            } catch (e: Exception) {
+                Log.e("NowPlayingViewModel", "Error fetching trailer ID: ${e.message}")
+            }
+        }
+    }*/
+
 }
 
 
