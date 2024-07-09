@@ -10,4 +10,8 @@ class NowRepo(private val apikey: String ) {
     suspend fun getNowPlaying(): Response<MoviesResponse> {
         return appModule.getNowPlaying()
     }
+
+  /*  suspend fun getMovieTrailers(movieId: Int): Response<MoviesResponse> {
+        return appModule.getTrailer(movieId)
+    }*/
 }

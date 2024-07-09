@@ -1,5 +1,7 @@
 package com.dominic.movieswatch.ui.fragments
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.dominic.movieswatch.R
 import com.dominic.movieswatch.databinding.FragmentMovieDetailsBinding
+import com.dominic.movieswatch.model.TrailerResult
 import com.dominic.movieswatch.repository.MovieDetailsRepo
 import com.dominic.movieswatch.utils.API_KEY
 import com.dominic.movieswatch.viewmodel.MovieDetailsViewModel
@@ -40,7 +43,6 @@ class MovieDetailsFragment : Fragment() {
                 Glide.with(this)
                     .load(url)
                     .into(binding.moviePoster)
-                //cl.. ls here
             }
         }
 
@@ -57,7 +59,25 @@ class MovieDetailsFragment : Fragment() {
 
             }
         }
+
+        binding.trailerView.setOnClickListener {
+            val trailer = viewModel.trailers.value?.firstOrNull()
+            if (trailer != null) {
+                playTrailer(trailer)
+            }
+        }
+
+
         return binding.root
+    }
+
+    fun playTrailer(trailer: TrailerResult) {
+        val trailerUrl = "https://www.youtube.com/watch?v=${trailer.key}"
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(trailerUrl))
+        intent.putExtra("force_fullscreen", true)
+        startActivity(intent)
+
+        viewModel.setTrailerVisible(false)  // Reset trailer visibility after playing
     }
 }
 
