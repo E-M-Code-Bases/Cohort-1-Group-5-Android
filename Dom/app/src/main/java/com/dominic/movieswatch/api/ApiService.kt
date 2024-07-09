@@ -16,9 +16,11 @@ interface ApiService {
     suspend fun getNowPlaying(@Query("page") i: Int = 1): Response<MoviesResponse>
 
     @GET("movie/{movie_id}/videos")
-       suspend fun playTrailer(@Path("movie_id") movieId: Int,
-                               @Query("language") language: String? = "en-US",
-                               @Query("api_key") apiKey: String): Response<TrailerResponse>
+    suspend fun getTrailers(
+        @Path("movie_id") movieId: Int,
+        @Query("api_key") apiKey: String
+    ): Response<TrailerResponse>
+
 
     @GET("movie/popular")
     suspend fun getPopularMovies(@Query("page") i: Int = 1): Response<MoviesResponse>
