@@ -17,9 +17,6 @@ class MovieDetailsViewModel(private val repository: MovieDetailsRepo) : ViewMode
     private val _trailers = MutableLiveData<List<TrailerResult>>()
     val trailers: LiveData<List<TrailerResult>> get() = _trailers
 
-    private val _isTrailerVisible = MutableLiveData<Boolean>()
-    val isTrailerVisible: LiveData<Boolean> get() = _isTrailerVisible
-
     private val _isFavorite = MutableLiveData<Boolean>()
     val isFavorite: LiveData<Boolean> get() = _isFavorite
 
@@ -67,9 +64,6 @@ class MovieDetailsViewModel(private val repository: MovieDetailsRepo) : ViewMode
         }
     }
 
-    fun setTrailerVisible(visible: Boolean) {
-        _isTrailerVisible.value = visible
-    }
 }
 
 class MovieDetailsViewModelFactory(private val repository: MovieDetailsRepo) : ViewModelProvider.Factory {
