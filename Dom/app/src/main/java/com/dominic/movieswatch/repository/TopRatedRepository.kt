@@ -1,6 +1,5 @@
 package com.dominic.movieswatch.repository
 
-import com.dominic.movieswatch.api.ApiService
 import com.dominic.movieswatch.di.AppModule
 import com.dominic.movieswatch.model.MoviesResponse
 import retrofit2.Response
