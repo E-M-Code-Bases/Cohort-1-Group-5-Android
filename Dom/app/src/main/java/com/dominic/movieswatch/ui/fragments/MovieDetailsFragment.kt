@@ -88,6 +88,18 @@ class MovieDetailsFragment : Fragment() {
                 Log.e("YouTubePlayerError", "Error: $error")
             }
         })
+       /* val playerUiController = youTubePlayerView.getPlayerUiController()
+        playerUiController.setFullScreenButtonClickListener {
+            if (youTubePlayerView.isFullScreen()) {
+                youTubePlayerView.exitFullScreen()
+                requireActivity().window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
+                requireActivity().requestedOrientation = android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+            } else {
+                youTubePlayerView.enterFullScreen()
+                requireActivity().window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+                requireActivity().requestedOrientation = android.content.pm.ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+            }
+        }*/
 
         youTubePlayerView.setOnClickListener {
             youTubePlayerView.getYouTubePlayerWhenReady(object : YouTubePlayerCallback {
