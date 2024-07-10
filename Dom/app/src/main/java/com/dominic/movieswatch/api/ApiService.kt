@@ -2,7 +2,7 @@ package com.dominic.movieswatch.api
 
 import com.dominic.movieswatch.model.MoviesResponse
 import com.dominic.movieswatch.model.FavoriteRequest
-import com.dominic.movieswatch.model.Movie
+import com.dominic.movieswatch.model.VideoResponse
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -13,6 +13,9 @@ interface ApiService {
 
     @GET("movie/now_playing")
     suspend fun getNowPlaying(@Query("page") i: Int = 1): Response<MoviesResponse>
+
+    @GET("movie/{movie_id}/videos")
+       suspend fun getMovieVideos(@Path("movie_id") movieId: Int, @Query("api_key") apiKey: String): Response<VideoResponse>
 
     @GET("movie/popular")
     suspend fun getPopularMovies(@Query("page") i: Int = 1): Response<MoviesResponse>

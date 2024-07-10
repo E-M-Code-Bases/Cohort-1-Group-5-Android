@@ -36,13 +36,6 @@ class UpcomingMoviesFragment : Fragment() {
             UpcomingMoviesProvider(repository)
         }
 
-//        upAdapter = MovieAdapter(emptyList()) { movie ->
-//            val bundle = Bundle().apply {
-//                putParcelable("movieTitle", movie)
-//            }
-//            findNavController().navigate(R.id.action_homePage_to_movieDetailsFragment, bundle)
-//        }
-
 
 
         upcomingViewModel.upcomingMovies.observe(viewLifecycleOwner) { upcomingMovies ->
