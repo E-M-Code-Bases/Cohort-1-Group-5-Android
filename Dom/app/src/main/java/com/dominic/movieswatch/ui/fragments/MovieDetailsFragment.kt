@@ -51,7 +51,6 @@ class MovieDetailsFragment : Fragment() {
         binding.favoriteIcon.setOnClickListener {
             val movie = binding.movie
             if (movie != null) {
-//                viewModel.toggleFavorite(account_id, "Bearer $API_KEY", movie)
                 viewModel.toggleFavorite(movie)
 
             }
