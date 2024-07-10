@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.dominic.movieswatch.R
-import com.dominic.movieswatch.viewmodel.VideoViewModel
 
 class VideoFragment : Fragment() {
 
@@ -15,7 +14,6 @@ class VideoFragment : Fragment() {
         fun newInstance() = VideoFragment()
     }
 
-    private val viewModel: VideoViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
