@@ -66,6 +66,7 @@ class MovieDetailsViewModel(private val repository: MovieDetailsRepo) : ViewMode
 
 }
 
+
 class MovieDetailsViewModelFactory(private val repository: MovieDetailsRepo) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MovieDetailsViewModel::class.java)) {
