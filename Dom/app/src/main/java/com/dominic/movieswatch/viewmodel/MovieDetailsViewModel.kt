@@ -3,6 +3,7 @@ package com.dominic.movieswatch.viewmodel
 import android.util.Log
 import androidx.lifecycle.*
 import com.dominic.movieswatch.model.Movie
+import com.dominic.movieswatch.model.TrailerResult
 import com.dominic.movieswatch.repository.MovieDetailsRepo
 import com.dominic.movieswatch.utils.API_KEY
 import com.dominic.movieswatch.utils.account_id
@@ -13,8 +14,13 @@ class MovieDetailsViewModel(private val repository: MovieDetailsRepo) : ViewMode
     private val _movieDetails = MutableLiveData<Movie?>()
     val movie: LiveData<Movie?> get() = _movieDetails
 
+    private val _trailers = MutableLiveData<List<TrailerResult>>()
+    val trailers: LiveData<List<TrailerResult>> get() = _trailers
+
+
     private val _isFavorite = MutableLiveData<Boolean>()
     val isFavorite: LiveData<Boolean> get() = _isFavorite
+
 
 
     fun getMovieDetails(title: String): LiveData<Movie?> {
@@ -25,12 +31,24 @@ class MovieDetailsViewModel(private val repository: MovieDetailsRepo) : ViewMode
                 _movieDetails.postValue(movie)
                 movie?.let {
                     _isFavorite.value = repository.isFavorite(account_id, "Bearer $API_KEY", it.id)
+                    getTrailer(it.id)
                 }
             } catch (e: Exception) {
                 Log.e("MovieDetailsViewModel", "Error fetching movie details: ${e.message}")
             }
         }
         return movie
+    }
+
+    fun getTrailer(movieId: Int) {
+        viewModelScope.launch {
+            try {
+                val trailers = repository.getTrailers(movieId, "Bearer $API_KEY")
+                _trailers.postValue(trailers)
+            } catch (e: Exception) {
+                Log.e("MovieDetailsViewModel", "Error fetching trailers: ${e.message}")
+            }
+        }
     }
 
     fun toggleFavorite(movie: Movie) {
@@ -49,6 +67,7 @@ class MovieDetailsViewModel(private val repository: MovieDetailsRepo) : ViewMode
             }
         }
     }
+
 }
 
 
