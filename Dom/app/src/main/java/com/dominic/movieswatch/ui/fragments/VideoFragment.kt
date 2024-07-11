@@ -13,7 +13,6 @@ class VideoFragment : Fragment() {
         fun newInstance() = VideoFragment()
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
