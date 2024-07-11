@@ -46,12 +46,13 @@ class MovieDetailsFragment : Fragment() {
                 Glide.with(this)
                     .load(url)
                     .into(binding.moviePoster)
-                //cl.. ls here
+                viewModel.getTrailer(it.id)  // Fetch the trailer
             }
         }
 
         viewModel.isFavorite.observe(viewLifecycleOwner) { isFavorite ->
-            val favoriteIconRes = if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
+            val favoriteIconRes =
+                if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
             binding.favoriteIcon.setImageResource(favoriteIconRes)
         }
 
@@ -59,9 +60,14 @@ class MovieDetailsFragment : Fragment() {
             val movie = binding.movie
             if (movie != null) {
                 viewModel.toggleFavorite(movie)
-
             }
         }
+
+        viewModel.trailers.observe(viewLifecycleOwner) { trailers ->
+            val trailerId = trailers.firstOrNull()?.key
+            setupYouTubePlayerView(trailerId)
+        }
+
         return binding.root
     }
 
@@ -94,4 +100,3 @@ class MovieDetailsFragment : Fragment() {
         }
     }
 }
-

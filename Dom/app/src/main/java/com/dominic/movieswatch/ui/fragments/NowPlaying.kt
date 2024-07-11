@@ -54,9 +54,8 @@ class NowPlaying : Fragment() {
                 layoutManager = GridLayoutManager(context, 3)
                 adapter = movieAdapter
             }
+
         }
-
-
 
         return binding.root
 
