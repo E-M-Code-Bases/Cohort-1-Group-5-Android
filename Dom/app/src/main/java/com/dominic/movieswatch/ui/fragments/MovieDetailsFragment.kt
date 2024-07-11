@@ -1,6 +1,7 @@
 package com.dominic.movieswatch.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,11 @@ import com.dominic.movieswatch.repository.MovieDetailsRepo
 import com.dominic.movieswatch.utils.API_KEY
 import com.dominic.movieswatch.viewmodel.MovieDetailsViewModel
 import com.dominic.movieswatch.viewmodel.MovieDetailsViewModelFactory
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerCallback
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
 class MovieDetailsFragment : Fragment() {
 
@@ -40,12 +46,13 @@ class MovieDetailsFragment : Fragment() {
                 Glide.with(this)
                     .load(url)
                     .into(binding.moviePoster)
-                //cl.. ls here
+                viewModel.getTrailer(it.id)  // Fetch the trailer
             }
         }
 
         viewModel.isFavorite.observe(viewLifecycleOwner) { isFavorite ->
-            val favoriteIconRes = if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
+            val favoriteIconRes =
+                if (isFavorite) R.drawable.ic_favorite else R.drawable.ic_favorite_border
             binding.favoriteIcon.setImageResource(favoriteIconRes)
         }
 
@@ -53,10 +60,54 @@ class MovieDetailsFragment : Fragment() {
             val movie = binding.movie
             if (movie != null) {
                 viewModel.toggleFavorite(movie)
-
             }
         }
+
+        viewModel.trailers.observe(viewLifecycleOwner) { trailers ->
+            val trailerId = trailers.firstOrNull()?.key
+            setupYouTubePlayerView(trailerId)
+        }
+
         return binding.root
     }
-}
 
+    private fun setupYouTubePlayerView(trailerId: String?) {
+        val youTubePlayerView: YouTubePlayerView = binding.trailerView
+
+        lifecycle.addObserver(youTubePlayerView)
+
+        youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+            override fun onReady(youTubePlayer: YouTubePlayer) {
+                Log.d("YouTubePlayer", "YouTubePlayer is ready")
+                trailerId?.let {
+                    youTubePlayer.cueVideo(it, 0f)
+                }
+            }
+
+            override fun onError(youTubePlayer: YouTubePlayer, error: PlayerConstants.PlayerError) {
+                Log.e("YouTubePlayerError", "Error: $error")
+            }
+        })
+       /* val playerUiController = youTubePlayerView.getPlayerUiController()
+        playerUiController.setFullScreenButtonClickListener {
+            if (youTubePlayerView.isFullScreen()) {
+                youTubePlayerView.exitFullScreen()
+                requireActivity().window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
+                requireActivity().requestedOrientation = android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+            } else {
+                youTubePlayerView.enterFullScreen()
+                requireActivity().window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+                requireActivity().requestedOrientation = android.content.pm.ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+            }
+        }*/
+
+        youTubePlayerView.setOnClickListener {
+            youTubePlayerView.getYouTubePlayerWhenReady(object : YouTubePlayerCallback {
+                override fun onYouTubePlayer(youTubePlayer: YouTubePlayer) {
+                    Log.d("YouTubePlayer", "Playing video")
+                    youTubePlayer.play()
+                }
+            })
+        }
+    }
+}
