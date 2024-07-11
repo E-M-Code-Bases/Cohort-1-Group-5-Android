@@ -75,3 +75,4 @@ class MovieDetailsViewModelFactory(private val repository: MovieDetailsRepo) : V
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
+
