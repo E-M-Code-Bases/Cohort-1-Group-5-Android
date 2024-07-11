@@ -17,8 +17,10 @@ class MovieDetailsViewModel(private val repository: MovieDetailsRepo) : ViewMode
     private val _trailers = MutableLiveData<List<TrailerResult>>()
     val trailers: LiveData<List<TrailerResult>> get() = _trailers
 
+
     private val _isFavorite = MutableLiveData<Boolean>()
     val isFavorite: LiveData<Boolean> get() = _isFavorite
+
 
 
     fun getMovieDetails(title: String): LiveData<Movie?> {
