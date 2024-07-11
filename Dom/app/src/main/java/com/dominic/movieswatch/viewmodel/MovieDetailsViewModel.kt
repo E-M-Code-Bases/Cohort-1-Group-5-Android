@@ -3,6 +3,7 @@ package com.dominic.movieswatch.viewmodel
 import android.util.Log
 import androidx.lifecycle.*
 import com.dominic.movieswatch.model.Movie
+import com.dominic.movieswatch.model.TrailerResult
 import com.dominic.movieswatch.repository.MovieDetailsRepo
 import com.dominic.movieswatch.utils.API_KEY
 import com.dominic.movieswatch.utils.account_id
@@ -13,11 +14,18 @@ class MovieDetailsViewModel(private val repository: MovieDetailsRepo) : ViewMode
     private val _movieDetails = MutableLiveData<Movie?>()
     val movie: LiveData<Movie?> get() = _movieDetails
 
+    private val _trailers = MutableLiveData<List<TrailerResult>>()
+    val trailers: LiveData<List<TrailerResult>> get() = _trailers
+
+
     private val _isFavorite = MutableLiveData<Boolean>()
     val isFavorite: LiveData<Boolean> get() = _isFavorite
 
+
+
     fun getMovieDetails(title: String): LiveData<Movie?> {
         viewModelScope.launch {
+
             try {
                 val movie = repository.getMovieByTitle(title)
                 _movieDetails.postValue(movie)

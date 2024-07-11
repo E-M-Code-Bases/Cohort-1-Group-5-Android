@@ -1,6 +1,7 @@
 package com.dominic.movieswatch.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,11 @@ import com.dominic.movieswatch.repository.MovieDetailsRepo
 import com.dominic.movieswatch.utils.API_KEY
 import com.dominic.movieswatch.viewmodel.MovieDetailsViewModel
 import com.dominic.movieswatch.viewmodel.MovieDetailsViewModelFactory
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerCallback
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
 class MovieDetailsFragment : Fragment() {
 
@@ -57,6 +63,35 @@ class MovieDetailsFragment : Fragment() {
             }
         }
         return binding.root
+    }
+
+    private fun setupYouTubePlayerView(trailerId: String?) {
+        val youTubePlayerView: YouTubePlayerView = binding.trailerView
+
+        lifecycle.addObserver(youTubePlayerView)
+
+        youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+            override fun onReady(youTubePlayer: YouTubePlayer) {
+                Log.d("YouTubePlayer", "YouTubePlayer is ready")
+                trailerId?.let {
+                    youTubePlayer.cueVideo(it, 0f)
+                }
+            }
+
+            override fun onError(youTubePlayer: YouTubePlayer, error: PlayerConstants.PlayerError) {
+                Log.e("YouTubePlayerError", "Error: $error")
+            }
+        })
+
+
+        youTubePlayerView.setOnClickListener {
+            youTubePlayerView.getYouTubePlayerWhenReady(object : YouTubePlayerCallback {
+                override fun onYouTubePlayer(youTubePlayer: YouTubePlayer) {
+                    Log.d("YouTubePlayer", "Playing video")
+                    youTubePlayer.play()
+                }
+            })
+        }
     }
 }
 

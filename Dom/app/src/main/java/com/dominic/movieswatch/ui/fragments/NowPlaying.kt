@@ -41,6 +41,7 @@ class NowPlaying : Fragment() {
         }
         nowPlayingViewModel.nowPlayingMovies.observe(viewLifecycleOwner) { popularMovies ->
             movieAdapter = MovieAdapter(popularMovies) { movie ->
+
                 val bundle = Bundle().apply {
                     putParcelable("movie", movie)
                 }
