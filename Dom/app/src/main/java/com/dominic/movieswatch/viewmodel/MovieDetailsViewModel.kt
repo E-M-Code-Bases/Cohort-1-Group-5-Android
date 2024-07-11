@@ -22,6 +22,7 @@ class MovieDetailsViewModel(private val repository: MovieDetailsRepo) : ViewMode
 
     fun getMovieDetails(title: String): LiveData<Movie?> {
         viewModelScope.launch {
+
             try {
                 val movie = repository.getMovieByTitle(title)
                 _movieDetails.postValue(movie)
