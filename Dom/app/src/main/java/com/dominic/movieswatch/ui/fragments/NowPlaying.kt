@@ -41,11 +41,9 @@ class NowPlaying : Fragment() {
         }
         nowPlayingViewModel.nowPlayingMovies.observe(viewLifecycleOwner) { popularMovies ->
             movieAdapter = MovieAdapter(popularMovies) { movie ->
-                /*   nowPlayingViewModel.fetchTrailerId(movie.id)
-                   nowPlayingViewModel.trailerId.observe(viewLifecycleOwner) { trailerId ->*/
+
                 val bundle = Bundle().apply {
                     putParcelable("movie", movie)
-                    // putString("trailerId", trailerId)
                 }
                 findNavController().navigate(
                     R.id.action_homePage_to_movieDetailsFragment,
