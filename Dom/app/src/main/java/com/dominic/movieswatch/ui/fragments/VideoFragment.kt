@@ -15,7 +15,6 @@ class VideoFragment : Fragment() {
         fun newInstance() = VideoFragment()
     }
 
-    private val viewModel: VideoViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
