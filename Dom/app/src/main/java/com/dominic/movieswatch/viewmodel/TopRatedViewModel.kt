@@ -36,7 +36,7 @@ class TopRatedViewModel(private val repository: TopRatedRepository) : ViewModel(
                 } catch (e: Exception) {
                     Log.e("", "Error fetching TopRatedMovies", e)
                 }
-                delay(10000L)
+                delay(1000L)
             }
 
         }

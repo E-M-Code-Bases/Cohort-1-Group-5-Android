@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -29,32 +28,40 @@ class UpcomingMoviesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentUpcomingMoviesBinding.inflate(inflater, container, false)
-        val sharedPreferences = requireContext().getSharedPreferences(PREF, Context.MODE_PRIVATE)
-        val apiKey = sharedPreferences.getString(API_KEY, "")!!
+        val sharedPrefs = requireContext().getSharedPreferences(PREF, Context.MODE_PRIVATE)
+        val apiKey = sharedPrefs.getString(API_KEY, "")!!
         val repository = UpcomingRepo(apiKey)
-        val upcomingViewModel:  UpcomingViewModel by viewModels { UpcomingMoviesProvider(repository) }
 
-
-        upcomingViewModel.upcomingMovies.observe(viewLifecycleOwner){upcomingMovies -> upAdapter = MovieAdapter(upcomingMovies){
-            movie ->   if(movie != null){
-                val bundle = Bundle().apply { putParcelable("movie", movie) }
-            findNavController().navigate(R.id.action_homePage_to_movieDetailsFragment,bundle)
-        }
-        else{Toast.makeText(requireContext(), "No Upcoming movies",Toast.LENGTH_SHORT).show()}
-        }
-        binding.upcomingRecyclerView.apply {
-            layoutManager = GridLayoutManager(context, 3)
-            adapter = upAdapter
+        val upcomingViewModel: UpcomingViewModel by viewModels {
+            UpcomingMoviesProvider(repository)
         }
 
+
+
+        upcomingViewModel.upcomingMovies.observe(viewLifecycleOwner) { upcomingMovies ->
+            upAdapter=MovieAdapter(upcomingMovies) { movie ->
+                if (movie != null) {
+                    val bundle = Bundle().apply {
+                        putParcelable("movie", movie)
+                    }
+                    findNavController().navigate(
+                        R.id.action_homePage_to_movieDetailsFragment,
+                        bundle
+                    )
+                }else {
+                    Log.d("UpcomingMovies", "Movie is null")
+                }
+            }
+            binding.upcomingRecyclerView.apply {
+                layoutManager = GridLayoutManager(context, 3)
+                adapter = upAdapter
+            }
         }
         return binding.root
-        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding.upcomingRecyclerView.adapter =null
+        binding.upcomingRecyclerView.adapter = null
     }
-
-        }
-
+}

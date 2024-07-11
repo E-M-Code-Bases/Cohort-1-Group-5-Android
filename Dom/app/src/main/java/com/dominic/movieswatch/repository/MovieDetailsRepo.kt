@@ -4,6 +4,7 @@ import com.dominic.movieswatch.api.ApiService
 import com.dominic.movieswatch.di.AppModule
 import com.dominic.movieswatch.model.Movie
 import com.dominic.movieswatch.model.FavoriteRequest
+import com.dominic.movieswatch.model.TrailerResponse
 import com.dominic.movieswatch.model.TrailerResult
 import retrofit2.HttpException
 

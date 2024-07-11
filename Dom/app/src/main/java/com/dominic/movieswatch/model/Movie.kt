@@ -26,8 +26,7 @@ data class Movie(
     @ColumnInfo(name = "title") val title: String,
     @ColumnInfo(name = "video") val video: Boolean,
     @SerializedName("vote_average") val voteAverage: Double,
-    @SerializedName("vote_count") val voteCount: Int,
-    @ColumnInfo(name = "trailer_id") val trailerId: String =""
+    @SerializedName("vote_count") val voteCount: Int
 ) : Parcelable {
     override fun hashCode(): Int {
         return id

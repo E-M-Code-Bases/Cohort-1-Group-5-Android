@@ -19,8 +19,6 @@ class NowPlayingViewModel(private val repo: NowRepo) : ViewModel() {
         fetchNowPlayingMovies()
     }
 
-
-
     private fun fetchNowPlayingMovies() {
         viewModelScope.launch {
             while (isActive) {
@@ -45,7 +43,6 @@ class NowPlayingViewModel(private val repo: NowRepo) : ViewModel() {
 
 
     }
-
 }
 
 

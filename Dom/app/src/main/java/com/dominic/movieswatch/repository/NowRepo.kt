@@ -10,6 +10,4 @@ class NowRepo(private val apikey: String ) {
     suspend fun getNowPlaying(): Response<MoviesResponse> {
         return appModule.getNowPlaying()
     }
-
-
 }
