@@ -1,10 +1,7 @@
 package com.dominic.movieswatch.model
 
 import android.os.Parcelable
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.ColumnInfo
-import androidx.room.TypeConverter
+import androidx.room.*
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import com.google.gson.reflect.TypeToken
@@ -16,7 +13,7 @@ data class Movie(
     @PrimaryKey val id: Int,
     @ColumnInfo(name = "adult") val adult: Boolean,
     @ColumnInfo(name = "backdrop_path") val backdropPath: String,
-    @ColumnInfo(name = "genre_ids") val genreIds: List<Int>,
+    @ColumnInfo(name = "genre_ids") val genreIds: List<Int>?,
     @ColumnInfo(name = "original_language") val originalLanguage: String,
     @ColumnInfo(name = "original_title") val originalTitle: String,
     @ColumnInfo(name = "overview") val overview: String,
@@ -26,7 +23,8 @@ data class Movie(
     @ColumnInfo(name = "title") val title: String,
     @ColumnInfo(name = "video") val video: Boolean,
     @SerializedName("vote_average") val voteAverage: Double,
-    @SerializedName("vote_count") val voteCount: Int
+    @SerializedName("vote_count") val voteCount: Int,
+    @ColumnInfo(name = "timestamp") val timestamp: Long = System.currentTimeMillis()
 ) : Parcelable {
     override fun hashCode(): Int {
         return id
@@ -47,4 +45,12 @@ class Converters {
         val type = object : TypeToken<List<Int>>() {}.type
         return gson.fromJson(genreIdsString, type)
     }
+}
+
+fun String?.orDefault(default: String): String {
+    return this ?: default
+}
+
+fun List<Int>?.orEmptyList(): List<Int> {
+    return this ?: emptyList()
 }

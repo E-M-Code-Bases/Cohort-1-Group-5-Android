@@ -30,7 +30,7 @@ class UpcomingMoviesFragment : Fragment() {
         binding = FragmentUpcomingMoviesBinding.inflate(inflater, container, false)
         val sharedPrefs = requireContext().getSharedPreferences(PREF, Context.MODE_PRIVATE)
         val apiKey = sharedPrefs.getString(API_KEY, "")!!
-        val repository = UpcomingRepo(apiKey)
+        val repository = UpcomingRepo(apiKey, requireContext())
 
         val upcomingViewModel: UpcomingViewModel by viewModels {
             UpcomingMoviesProvider(repository)
