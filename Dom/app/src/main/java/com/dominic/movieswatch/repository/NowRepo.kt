@@ -43,7 +43,7 @@ class NowRepo(private val apiKey: String, private val context: Context) {
                             timestamp = System.currentTimeMillis()
                         )
                     }
-                    // Insert movies into database
+
                     insertMovies(movies)
                     Log.d("NowRepo", "Movies fetched from network: ${movies.size}")
                     return movies
@@ -61,7 +61,7 @@ class NowRepo(private val apiKey: String, private val context: Context) {
     }
 
     companion object {
-        const val FRESHNESS_INTERVAL = 1000 * 60 * 60 * 24 // 24 hours
+        const val FRESHNESS_INTERVAL = 1000 * 60 * 60 * 24
     }
 }
 
