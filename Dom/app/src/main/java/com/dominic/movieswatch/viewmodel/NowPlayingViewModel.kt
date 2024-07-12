@@ -28,7 +28,8 @@ class NowPlayingViewModel(private val repo: NowRepo) : ViewModel() {
                 } catch (e: Exception) {
                     Log.e("NowPlayingViewModel", "Error fetching now playing movies", e)
                 }
-                delay(10000L) // Delay for 10 seconds before fetching again (adjust as needed)
+                delay(10000L)
+
             }
         }
     }
