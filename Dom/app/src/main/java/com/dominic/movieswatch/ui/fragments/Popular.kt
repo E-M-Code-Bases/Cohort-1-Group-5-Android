@@ -33,7 +33,7 @@ class Popular : Fragment() {
 
         val apiKey = sharedPrefs.getString(API_KEY, "")!!
 
-        val popRepo = PopRepo(apiKey)
+        val popRepo = PopRepo(apiKey, requireContext())
 
         val popularViewModel: PopularViewmodel by viewModels {
             PopularProvider(popRepo)
