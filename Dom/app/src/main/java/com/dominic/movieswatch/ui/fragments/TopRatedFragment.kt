@@ -34,29 +34,26 @@ class TopRatedFragment : Fragment() {
         val topRatedViewModel: TopRatedViewModel by viewModels {
             TRProvider(repository)
         }
-        tRAdapter = MovieAdapter(emptyList()) { movie ->
-            val bundle = Bundle().apply {
-                putString("movieTitle", movie.title)
+        topRatedViewModel.topRatedMovies.observe(viewLifecycleOwner) { topRatedMovies ->
+            tRAdapter = MovieAdapter(topRatedMovies) { movie ->
+                val bundle = Bundle().apply {
+                    putParcelable("movie", movie)
+
+                }
+                findNavController().navigate(R.id.action_homePage_to_movieDetailsFragment, bundle)
+
+
             }
-          //  findNavController().navigate(R.id., bundle)
-        }
-        binding.recyclerViewTR.apply {
-            layoutManager = GridLayoutManager(context, 3)
-            adapter = tRAdapter
-        }
-        topRatedViewModel.topRatedMovies.observe(
-            viewLifecycleOwner
-        ) { topRatedMovies ->
-
-         //   tRAdapter.updateMovies(topRatedMovies)
-
+            binding.recyclerViewTR.apply {
+                layoutManager = GridLayoutManager(context, 3)
+                adapter = tRAdapter
+            }
 
         }
-
         return binding.root
     }
     override fun onDestroyView() {
-        super.onDestroyView()
-        binding.recyclerViewTR.adapter = null
-    }
+       super.onDestroyView()
+       binding.recyclerViewTR.adapter = null
+   }
 }
