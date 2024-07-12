@@ -11,7 +11,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
-
 class NowPlayingViewModel(private val repo: NowRepo) : ViewModel() {
     var nowPlayingMovies = MutableLiveData<List<Movie>>(emptyList())
 
@@ -23,28 +22,17 @@ class NowPlayingViewModel(private val repo: NowRepo) : ViewModel() {
         viewModelScope.launch {
             while (isActive) {
                 try {
-                    val response = repo.getNowPlaying()
-                    if (response.isSuccessful) {
-                        if (response.body()!!.results.isNotEmpty()) {
-                            nowPlayingMovies.postValue(response.body()?.results)
-                        } else {
-                            Log.d("", "no new  movies found")
-
-                        }
-                    } else {
-                        Log.d("", "Error fetching Now Playing movies: ${response.code()}")
-                    }
+                    val movies = repo.getNowPlaying()
+                    nowPlayingMovies.postValue(movies)
+                    Log.d("NowPlayingViewModel", "Movies fetched from network: ${movies.size}")
                 } catch (e: Exception) {
-                    Log.e("", "Error fetching nowPlaying movies", e)
+                    Log.e("NowPlayingViewModel", "Error fetching now playing movies", e)
                 }
-                delay(10000L)
+                delay(10000L) // Delay for 10 seconds before fetching again (adjust as needed)
             }
         }
-
-
     }
 }
-
 
 class NowPlayingProvider(private val repo: NowRepo) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

@@ -1,15 +1,19 @@
 package com.dominic.movieswatch.database
 
-import androidx.lifecycle.LiveData
-import androidx.room.*
 import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.dominic.movieswatch.model.Movie
-
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface MovieDao {
     @Query("SELECT * FROM movies")
-    suspend fun getAllMovies(): List<Movie>
+    fun getAllMovies(): Flow<List<Movie>>
+
+    @Query("SELECT * FROM movies WHERE timestamp > :freshnessTime")
+    suspend fun getFreshMovies(freshnessTime: Long): List<Movie>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMovies(movies: List<Movie>)
@@ -17,4 +21,3 @@ interface MovieDao {
     @Query("DELETE FROM movies")
     suspend fun clearMovies()
 }
-
