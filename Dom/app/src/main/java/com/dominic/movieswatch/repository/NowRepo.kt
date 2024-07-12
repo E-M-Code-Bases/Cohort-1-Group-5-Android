@@ -43,7 +43,7 @@ class NowRepo(private val apiKey: String, private val context: Context) {
                             timestamp = System.currentTimeMillis()
                         )
                     }
-
+                    movieDao.clearMovies()
                     insertMovies(movies)
                     Log.d("NowRepo", "Movies fetched from network: ${movies.size}")
                     return movies
