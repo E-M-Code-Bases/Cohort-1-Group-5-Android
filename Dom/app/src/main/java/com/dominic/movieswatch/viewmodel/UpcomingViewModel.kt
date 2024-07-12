@@ -21,27 +21,19 @@ class UpcomingViewModel(val repository: UpcomingRepo):ViewModel (){
         fetchUpcomingMovies()
     }
     private fun fetchUpcomingMovies(){
-       viewModelScope.launch {
-           while (isActive) {
-               try {
-                   val response = repository.getUpcomingMovies()
-                   if (response.isSuccessful) {
-                       if (response.body()!!.results.isNotEmpty()) {
-                           upcomingMovies.postValue(response.body()?.results)
-                       } else {
-                           errorMessage.postValue("No new movies found")
-                       }
-                   } else {
-                       errorMessage.postValue("Error fetching Now Playing movies: ${response.code()}")
-                   }
+        viewModelScope.launch {
+            while (isActive) {
+                try {
+                    val movies = repository.getUpcomingMovies()
+                    upcomingMovies.postValue(movies)
+                    Log.d("UpcomingViewModel", "Movies fetched from network: ${movies.size}")
+                } catch (e: Exception) {
+                    Log.e("UpcomingViewModel", "Error fetching upcoming movies", e)
+                }
+                delay(10000L)
 
-
-               } catch (e: Exception) {
-                   errorMessage.postValue("Error fetching upcoming movies: ${e.message}")
-               }
-               delay(10000L)
-           }
-       }
+            }
+        }
 
     }
 

@@ -33,7 +33,7 @@ class NowPlaying : Fragment() {
 
         val apiKey = sharedPrefs.getString(API_KEY, "")!!
 
-        val repo = NowRepo(apiKey)
+        val repo = NowRepo(apiKey, requireContext())
 
         val nowPlayingViewModel: NowPlayingViewModel by viewModels {
             NowPlayingProvider(repo)
