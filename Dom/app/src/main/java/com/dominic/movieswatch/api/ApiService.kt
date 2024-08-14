@@ -16,9 +16,13 @@ interface ApiService {
     suspend fun getNowPlaying(@Query("page") i: Int = 1): Response<MoviesResponse>
 
     @GET("movie/{movie_id}/videos")
-       suspend fun getTrailers(
+    suspend fun getTrailers(
         @Path("movie_id") movieId: Int,
-        @Query("api_key") apiKey: String): Response<TrailerResponse>
+        @Query("api_key") apiKey: String
+    ): Response<TrailerResponse>
+
+    @GET("movie/upcoming")
+    suspend fun getUpcomingMovies(@Query("page") i: Int = 1): Response<MoviesResponse>
 
     @GET("movie/popular")
     suspend fun getPopularMovies(@Query("page") i: Int = 1): Response<MoviesResponse>
@@ -26,8 +30,6 @@ interface ApiService {
     @GET("movie/top_rated")
     suspend fun fetchTopRatedMovies(@Query("page") i: Int = 1): Response<MoviesResponse>
 
-    @GET("movie/upcoming")
-    suspend fun getUpcomingMovies(@Query("page") i: Int = 1): Response<MoviesResponse>
 
     @GET("movie/trailers")
     suspend fun getTrailers(@Query("page") i: Int = 1): Response<MoviesResponse>
